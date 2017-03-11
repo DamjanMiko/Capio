@@ -156,7 +156,7 @@ class SlidingTabStrip extends LinearLayout {
         int separatorTop = (height - dividerHeightPx) / 2;
         for (int i = 0; i < childCount - 1; i++) {
             View child = getChildAt(i);
-            mDividerPaint.setColor(tabColorizer.getDividerColor(i));
+//            mDividerPaint.setColor(tabColorizer.getDividerColor(i));
             canvas.drawLine(child.getRight(), separatorTop, child.getRight(),
                     separatorTop + dividerHeightPx, mDividerPaint);
         }
@@ -192,10 +192,10 @@ class SlidingTabStrip extends LinearLayout {
             return mIndicatorColors[position % mIndicatorColors.length];
         }
 
-        @Override
-        public final int getDividerColor(int position) {
-            return mDividerColors[position % mDividerColors.length];
-        }
+//        @Override
+//        public final int getDividerColor(int position) {
+//            return mDividerColors[position % mDividerColors.length];
+//        }
 
         void setIndicatorColors(int... colors) {
             mIndicatorColors = colors;

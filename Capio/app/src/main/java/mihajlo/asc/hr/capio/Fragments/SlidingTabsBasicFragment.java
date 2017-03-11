@@ -20,10 +20,15 @@ import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.logger.Log;
 import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +86,8 @@ public class SlidingTabsBasicFragment extends Fragment {
         // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
         // it's PagerAdapter set.
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);
+        mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
         // END_INCLUDE (setup_slidingtablayout)
     }
@@ -111,6 +118,19 @@ public class SlidingTabsBasicFragment extends Fragment {
             return o == view;
         }
 
+
+        private int[] imageResId = {
+                R.drawable.ic_home,
+                R.drawable.ic_map,
+                R.drawable.ic_profile
+        };
+
+        private int[] fragmentsId = {
+                R.layout.fragment_realestate_list,
+                R.layout.fragment_map,
+                R.layout.fragment_profile
+        };
+
         // BEGIN_INCLUDE (pageradapter_getpagetitle)
         /**
          * Return the title of the item at {@code position}. This is important as what this method
@@ -121,7 +141,12 @@ public class SlidingTabsBasicFragment extends Fragment {
          */
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Item " + (position + 1);
+            Drawable image = ResourcesCompat.getDrawable(getResources(), imageResId[position], null);
+            image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+            SpannableString sb = new SpannableString(" ");
+            ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+            sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return sb;
         }
         // END_INCLUDE (pageradapter_getpagetitle)
 
@@ -132,18 +157,10 @@ public class SlidingTabsBasicFragment extends Fragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             // Inflate a new layout from our resources
-            View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item,
-                    container, false);
-            // Add the newly created View to the ViewPager
+            View view = getActivity().getLayoutInflater().inflate(
+                    fragmentsId[position], container, false);
             container.addView(view);
 
-            // Retrieve a TextView from the inflated View, and update it's text
-            TextView title = (TextView) view.findViewById(R.id.item_title);
-            title.setText(String.valueOf(position + 1));
-
-            Log.i(LOG_TAG, "instantiateItem() [position: " + position + "]");
-
-            // Return the View
             return view;
         }
 
