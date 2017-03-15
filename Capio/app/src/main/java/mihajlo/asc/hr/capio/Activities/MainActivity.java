@@ -18,8 +18,18 @@
 package mihajlo.asc.hr.capio.Activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,13 +39,13 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 
-import mihajlo.asc.hr.capio.Fragments.SlidingTabsBasicFragment;
+import java.util.ArrayList;
+
+import mihajlo.asc.hr.capio.Fragments.MapFragment;
+import mihajlo.asc.hr.capio.Fragments.ProfileFragment;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
-import mihajlo.asc.hr.capio.Slider.logger.Log;
-import mihajlo.asc.hr.capio.Slider.logger.LogFragment;
-import mihajlo.asc.hr.capio.Slider.logger.LogWrapper;
-import mihajlo.asc.hr.capio.Slider.logger.MessageOnlyLogFilter;
+import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -48,20 +58,35 @@ public class MainActivity extends SampleActivityBase {
 
     public static final String TAG = "MainActivity";
 
-    // Whether the Log Fragment is currently shown
-    private boolean mLogShown;
+    /**
+     * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
+     * above, but is designed to give continuous feedback to the user when scrolling.
+     */
+    private SlidingTabLayout mSlidingTabLayout;
+
+    /**
+     * A {@link ViewPager} which will be used in conjunction with the {@link SlidingTabLayout} above.
+     */
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            SlidingTabsBasicFragment fragment = new SlidingTabsBasicFragment();
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
-        }
+        // BEGIN_INCLUDE (setup_viewpager)
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager.setAdapter(new SamplePagerAdapter(getSupportFragmentManager()));
+        // END_INCLUDE (setup_viewpager)
+
+        // BEGIN_INCLUDE (setup_slidingtablayout)
+        // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
+        // it's PagerAdapter set.
+        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setViewPager(mViewPager);
 
         if(AccessToken.getCurrentAccessToken() == null) {
             goToLoginActivity();
@@ -78,6 +103,65 @@ public class MainActivity extends SampleActivityBase {
     public void logout(View view) {
         LoginManager.getInstance().logOut();
         goToLoginActivity();
+    }
+
+
+    /**
+     * The {@link PagerAdapter} used to display pages in this sample.
+     * The individual pages are simple and just display two lines of text. The important section of
+     * this class is the {@link #getPageTitle(int)} method which controls what is displayed in the
+     * {@link SlidingTabLayout}.
+     */
+    private class SamplePagerAdapter extends FragmentPagerAdapter {
+
+        private int[] imageResId = {
+                R.drawable.ic_home,
+                R.drawable.ic_map,
+                R.drawable.ic_profile
+        };
+
+        private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
+            add(new ProfileFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            add(new MapFragment());
+            add(new ProfileFragment());
+        }};
+
+        public SamplePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        /**
+         * @return the number of pages to display
+         */
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        // BEGIN_INCLUDE (pageradapter_getpagetitle)
+        /**
+         * Return the title of the item at {@code position}. This is important as what this method
+         * returns is what is displayed in the {@link SlidingTabLayout}.
+         * <p>
+         * Here we construct one using the position value, but for real application the title should
+         * refer to the item's contents.
+         */
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Drawable image = ResourcesCompat.getDrawable(getResources(), imageResId[position], null);
+            image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+            SpannableString sb = new SpannableString(" ");
+            ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+            sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return sb;
+        }
+        // END_INCLUDE (pageradapter_getpagetitle)
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
     }
 
 }
