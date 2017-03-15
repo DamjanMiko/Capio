@@ -63,24 +63,21 @@ public class MainActivity extends SampleActivityBase {
             transaction.commit();
         }
 
-//        if(AccessToken.getCurrentAccessToken() == null) {
-//            goToLoginActivity();
-//        }
-//
-//        private void goToLoginActivity() {
-//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(intent);
-//        }
-//
-//        public void logout(View view) {
-//            LoginManager.getInstance().logOut();
-//            goToLoginActivity();
-//        }
+        if(AccessToken.getCurrentAccessToken() == null) {
+            goToLoginActivity();
+        }
+
+    }
+
+    private void goToLoginActivity() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void logout(View view) {
         LoginManager.getInstance().logOut();
         goToLoginActivity();
     }
+
 }
