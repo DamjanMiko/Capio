@@ -22,10 +22,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ViewAnimator;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 
 import mihajlo.asc.hr.capio.Fragments.SlidingTabsBasicFragment;
 import mihajlo.asc.hr.capio.R;
@@ -122,5 +124,10 @@ public class MainActivity extends SampleActivityBase {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void logout(View view) {
+        LoginManager.getInstance().logOut();
+        goToLoginActivity();
     }
 }
