@@ -17,11 +17,15 @@
 
 package mihajlo.asc.hr.capio.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ViewAnimator;
+
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
 
 import mihajlo.asc.hr.capio.Fragments.SlidingTabsBasicFragment;
 import mihajlo.asc.hr.capio.R;
@@ -33,7 +37,7 @@ import mihajlo.asc.hr.capio.Slider.logger.MessageOnlyLogFilter;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
- * {@link android.support.v4.app.Fragment} which can display a view.
+ * {@link android.support.v4.app.Fragment * } which can display a view.
  * <p>
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
  * on other devices it's visibility is controlled by an item on the Action Bar.
@@ -55,6 +59,10 @@ public class MainActivity extends SampleActivityBase {
             SlidingTabsBasicFragment fragment = new SlidingTabsBasicFragment();
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
+        }
+
+        if(AccessToken.getCurrentAccessToken() == null) {
+            goToLoginActivity();
         }
     }
 }
