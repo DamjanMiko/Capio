@@ -17,12 +17,13 @@
 package mihajlo.asc.hr.capio.Fragments;
 
 import mihajlo.asc.hr.capio.R;
-import mihajlo.asc.hr.capio.Slider.logger.Log;
 import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -32,7 +33,8 @@ import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * A basic sample which shows how to use {@link mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout}
@@ -79,7 +81,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new SamplePagerAdapter());
+        mViewPager.setAdapter(new SamplePagerAdapter(getActivity().getSupportFragmentManager()));
         // END_INCLUDE (setup_viewpager)
 
         // BEGIN_INCLUDE (setup_slidingtablayout)
@@ -89,9 +91,12 @@ public class SlidingTabsBasicFragment extends Fragment {
         mSlidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
+
         // END_INCLUDE (setup_slidingtablayout)
     }
     // END_INCLUDE (fragment_onviewcreated)
+
+
 
     /**
      * The {@link PagerAdapter} used to display pages in this sample.
@@ -99,7 +104,23 @@ public class SlidingTabsBasicFragment extends Fragment {
      * this class is the {@link #getPageTitle(int)} method which controls what is displayed in the
      * {@link SlidingTabLayout}.
      */
-    class SamplePagerAdapter extends PagerAdapter {
+    private class SamplePagerAdapter extends FragmentPagerAdapter {
+
+        private int[] imageResId = {
+                R.drawable.ic_home,
+                R.drawable.ic_map,
+                R.drawable.ic_profile
+        };
+
+        private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
+            add(new ProfileFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            add(new MapFragment());
+            add(new ProfileFragment());
+        }};
+
+        public SamplePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
         /**
          * @return the number of pages to display
@@ -108,28 +129,6 @@ public class SlidingTabsBasicFragment extends Fragment {
         public int getCount() {
             return 3;
         }
-
-        /**
-         * @return true if the value returned from {@link #instantiateItem(ViewGroup, int)} is the
-         * same object as the {@link View} added to the {@link ViewPager}.
-         */
-        @Override
-        public boolean isViewFromObject(View view, Object o) {
-            return o == view;
-        }
-
-
-        private int[] imageResId = {
-                R.drawable.ic_home,
-                R.drawable.ic_map,
-                R.drawable.ic_profile
-        };
-
-        private int[] fragmentsId = {
-                R.layout.fragment_realestate_list,
-                R.layout.fragment_map,
-                R.layout.fragment_profile
-        };
 
         // BEGIN_INCLUDE (pageradapter_getpagetitle)
         /**
@@ -150,28 +149,9 @@ public class SlidingTabsBasicFragment extends Fragment {
         }
         // END_INCLUDE (pageradapter_getpagetitle)
 
-        /**
-         * Instantiate the {@link View} which should be displayed at {@code position}. Here we
-         * inflate a layout from the apps resources and then change the text view to signify the position.
-         */
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            // Inflate a new layout from our resources
-            View view = getActivity().getLayoutInflater().inflate(
-                    fragmentsId[position], container, false);
-            container.addView(view);
-
-            return view;
-        }
-
-        /**
-         * Destroy the item from the {@link ViewPager}. In our case this is simply removing the
-         * {@link View}.
-         */
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-            Log.i(LOG_TAG, "destroyItem() [position: " + position + "]");
+        public Fragment getItem(int position) {
+            return fragments.get(position);
         }
 
     }
