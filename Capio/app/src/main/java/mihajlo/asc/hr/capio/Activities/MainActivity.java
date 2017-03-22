@@ -38,6 +38,7 @@ import android.widget.ViewAnimator;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -107,6 +108,10 @@ public class MainActivity extends SampleActivityBase {
         korisnik = new User("1",firstName,lastName,pictureURL,birthday,"0911234567","Kneza Mihajla 3",email,gender);
 
 
+
+
+
+
     }
 
     private void goToLoginActivity() {
@@ -137,9 +142,14 @@ public class MainActivity extends SampleActivityBase {
         };
 
         private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
-            add(new ProfileFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            Bundle bundleUser = new Bundle();
+            bundleUser.putString("Korisnik",new Gson().toJson(korisnik) );
+            ProfileFragment tmpProfileFragment = new ProfileFragment();
+            tmpProfileFragment.setArguments(bundleUser);
+
+            add(tmpProfileFragment); // TODO umjesto ovoga treba dodati new RealEstateFragment()
             add(new MapFragment());
-            add(new ProfileFragment(korisnik)); // TODO u konstruktor dodati podatke dohvaćene iz Bundle
+            add(tmpProfileFragment); //
         }};
 
         public SamplePagerAdapter(FragmentManager fm) {

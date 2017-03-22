@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import mihajlo.asc.hr.capio.Models.User;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Util.ImageLoadTask;
@@ -33,24 +35,20 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public ProfileFragment(User korisnik) {
-       this.korisnik = korisnik;
-    }
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.d("MyApp","I am here");
+        String KorisnikJson = getArguments().getString("Korisnik");
+        korisnik = new Gson().fromJson(KorisnikJson, User.class);
         view =  inflater.inflate(R.layout.fragment_profile, container, false);
         inputName  = (EditText) view.findViewById(R.id.editText);
         inputEmail  = (EditText) view.findViewById(R.id.editText7);
         inputPh  = (EditText) view.findViewById(R.id.editText6);
         inputLoc  = (EditText) view.findViewById(R.id.editText8);
         imgView = (ImageView) view.findViewById(R.id.imageView);
-
 
 
         //
