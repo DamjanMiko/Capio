@@ -42,10 +42,9 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        String KorisnikJson = getArguments().getString("Korisnik");
+        String KorisnikString = getArguments().getString("Korisnik");
 
-        //Bundle argumenti = getArguments();
-        korisnik = new Gson().fromJson(KorisnikJson, User.class);
+        korisnik = User.fromString(KorisnikString);
         view =  inflater.inflate(R.layout.fragment_profile, container, false);
         inputName  = (EditText) view.findViewById(R.id.editText);
         inputEmail  = (EditText) view.findViewById(R.id.editText7);

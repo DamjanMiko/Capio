@@ -99,15 +99,15 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
 
 
         // TODO napraviti User klasu da bude bolji kod
-        Bundle bundle = getIntent().getExtras();
-        String pictureURL = bundle.getString("pictureURL");
-        String firstName = bundle.getString("firstName");
-        String lastName = bundle.getString("lastName");
-        String email = bundle.getString("email");
-        String birthday = bundle.getString("birthday");
-        String gender = bundle.getString("gender");
+//        Bundle bundle = getIntent().getExtras();
+//        String pictureURL = bundle.getString("pictureURL");
+//        String firstName = bundle.getString("firstName");
+//        String lastName = bundle.getString("lastName");
+//        String email = bundle.getString("email");
+//        String birthday = bundle.getString("birthday");
+//        String gender = bundle.getString("gender");
 
-        korisnik = new User("1",firstName,lastName,pictureURL,birthday,"0911234567","Kneza Mihajla 3",email,gender);
+        korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
 
 
 
@@ -155,7 +155,9 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         public SamplePagerAdapter(FragmentManager fm) {
             super(fm);
             Bundle bundleUser = new Bundle();
-            bundleUser.putString("Korisnik",new Gson().toJson(korisnik));
+            korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
+
+            bundleUser.putString("Korisnik",korisnik.toString());
             ProfileFragment tmpProfileFragment = new ProfileFragment();
             tmpProfileFragment.setArguments(bundleUser);
             fragments.add(new RealEstateFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()

@@ -26,4 +26,14 @@ public class User {
         this.email = email;
         this.gender = gender;
     }
+
+    @Override
+    public String toString() {
+        return id+";"+firstName+";"+lastName+";"+imgUrl+";"+dateOfBirth+";"+phone+";"+address+";"+email+";"+gender;
+    }
+
+    public static User fromString(String userString){
+        String[] s = userString.split(";");
+        return new User(s[0],s[1],s[2],s[3],s[4],s[5],s[6],s[7],s[8]);
+    }
 }
