@@ -43,6 +43,8 @@ import java.util.ArrayList;
 
 import mihajlo.asc.hr.capio.Fragments.MapFragment;
 import mihajlo.asc.hr.capio.Fragments.ProfileFragment;
+import mihajlo.asc.hr.capio.Fragments.RealEstateFragment;
+import mihajlo.asc.hr.capio.Fragments.dummy.DummyContent;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
 import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
@@ -54,7 +56,7 @@ import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
-public class MainActivity extends SampleActivityBase {
+public class MainActivity extends SampleActivityBase implements RealEstateFragment.OnListFragmentInteractionListener {
 
     public static final String TAG = "MainActivity";
 
@@ -106,6 +108,11 @@ public class MainActivity extends SampleActivityBase {
     }
 
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        //TODO implementirat
+    }
+
     /**
      * The {@link PagerAdapter} used to display pages in this sample.
      * The individual pages are simple and just display two lines of text. The important section of
@@ -121,7 +128,7 @@ public class MainActivity extends SampleActivityBase {
         };
 
         private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
-            add(new ProfileFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            add(new RealEstateFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
             add(new MapFragment());
             add(new ProfileFragment());
         }};

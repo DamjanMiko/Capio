@@ -37,7 +37,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
+        holder.mIdView.setText("$" + mValues.get(position).id + "/mo");
         holder.mContentView.setText(mValues.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
