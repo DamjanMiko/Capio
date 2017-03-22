@@ -78,17 +78,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
-        Button logoutButton = (Button) view.findViewById(R.id.button2);
-        logoutButton.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
         return view;
     }
 

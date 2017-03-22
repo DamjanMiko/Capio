@@ -45,6 +45,7 @@ import mihajlo.asc.hr.capio.Fragments.MapFragment;
 import mihajlo.asc.hr.capio.Fragments.ProfileFragment;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
+import mihajlo.asc.hr.capio.Slider.logger.Log;
 import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
 
 /**
@@ -92,12 +93,23 @@ public class MainActivity extends SampleActivityBase {
             goToLoginActivity();
         }
 
+
+        // TODO napraviti User klasu da bude bolji kod
+        Bundle bundle = getIntent().getExtras();
+        String pictureURL = bundle.getString("pictureURL");
+        String firstName = bundle.getString("firstName");
+        String lastName = bundle.getString("lastName");
+        String email = bundle.getString("email");
+        String birthday = bundle.getString("birthday");
+        String gender = bundle.getString("gender");
+
     }
 
     private void goToLoginActivity() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void logout(View view) {
@@ -123,7 +135,7 @@ public class MainActivity extends SampleActivityBase {
         private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
             add(new ProfileFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
             add(new MapFragment());
-            add(new ProfileFragment());
+            add(new ProfileFragment()); // TODO u konstruktor dodati podatke dohvaćene iz Bundle
         }};
 
         public SamplePagerAdapter(FragmentManager fm) {
