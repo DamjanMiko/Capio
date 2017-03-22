@@ -49,6 +49,7 @@ import mihajlo.asc.hr.capio.Fragments.dummy.DummyContent;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
 import mihajlo.asc.hr.capio.Slider.logger.Log;
+import mihajlo.asc.hr.capio.Models.User;
 import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
 
 /**
@@ -157,7 +158,7 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             bundleUser.putString("Korisnik",new Gson().toJson(korisnik));
             ProfileFragment tmpProfileFragment = new ProfileFragment();
             tmpProfileFragment.setArguments(bundleUser);
-            fragments.add(new MapFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            fragments.add(new RealEstateFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
             fragments.add(new MapFragment());
             fragments.add(tmpProfileFragment); //
         }
