@@ -23,7 +23,6 @@ public class ProfileFragment extends Fragment {
     EditText inputEmail;
     EditText inputPh;
     EditText inputLoc;
-    TextView tv;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -49,7 +48,6 @@ public class ProfileFragment extends Fragment {
          inputEmail  = (EditText) view.findViewById(R.id.editText7);
          inputPh  = (EditText) view.findViewById(R.id.editText6);
          inputLoc  = (EditText) view.findViewById(R.id.editText8);
-        tv = (TextView) view.findViewById(R.id.textView);
         UserInfo theUser = new UserInfo();
         theUser.username = "Ivica Kicmanovic";
         theUser.phone = "+385 91 012 3456";
@@ -69,14 +67,24 @@ public class ProfileFragment extends Fragment {
 
 
         inputLoc.setText(theUser.address);
-        Button clickButton = (Button) view.findViewById(R.id.button2);
-        clickButton.setOnClickListener( new View.OnClickListener() {
+
+        Button saveButton = (Button) view.findViewById(R.id.button3);
+        saveButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                tv.setText("please");
-                System.out.println("Trying");
+
+            }
+        });
+
+
+        Button logoutButton = (Button) view.findViewById(R.id.button2);
+        logoutButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
 
             }
         });
