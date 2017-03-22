@@ -41,7 +41,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         String KorisnikJson = getArguments().getString("Korisnik");
+
+        //Bundle argumenti = getArguments();
         korisnik = new Gson().fromJson(KorisnikJson, User.class);
         view =  inflater.inflate(R.layout.fragment_profile, container, false);
         inputName  = (EditText) view.findViewById(R.id.editText);
@@ -50,6 +53,7 @@ public class ProfileFragment extends Fragment {
         inputLoc  = (EditText) view.findViewById(R.id.editText8);
         imgView = (ImageView) view.findViewById(R.id.imageView);
 
+        //setArguments(new Bundle());
 
         //
 

@@ -141,19 +141,19 @@ public class MainActivity extends SampleActivityBase {
                 R.drawable.ic_profile
         };
 
-        private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
-            Bundle bundleUser = new Bundle();
-            bundleUser.putString("Korisnik",new Gson().toJson(korisnik) );
-            ProfileFragment tmpProfileFragment = new ProfileFragment();
-            tmpProfileFragment.setArguments(bundleUser);
+        private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 
-            add(tmpProfileFragment); // TODO umjesto ovoga treba dodati new RealEstateFragment()
-            add(new MapFragment());
-            add(tmpProfileFragment); //
-        }};
+
 
         public SamplePagerAdapter(FragmentManager fm) {
             super(fm);
+            Bundle bundleUser = new Bundle();
+            bundleUser.putString("Korisnik",new Gson().toJson(korisnik));
+            ProfileFragment tmpProfileFragment = new ProfileFragment();
+            tmpProfileFragment.setArguments(bundleUser);
+            fragments.add(new MapFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            fragments.add(new MapFragment());
+            fragments.add(tmpProfileFragment); //
         }
 
         /**
