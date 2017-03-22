@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ public class ProfileFragment extends Fragment {
     private EditText inputLoc;
     private ImageView imgView;
     private User korisnik;
+    private ScrollView mainScrollView;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,7 +53,7 @@ public class ProfileFragment extends Fragment {
         inputPh  = (EditText) view.findViewById(R.id.editText6);
         inputLoc  = (EditText) view.findViewById(R.id.editText8);
         imgView = (ImageView) view.findViewById(R.id.imageView);
-
+        mainScrollView = (ScrollView) view.findViewById(R.id.scrollView);
         //setArguments(new Bundle());
 
         //
@@ -74,7 +76,15 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+                String[] usernameSplit = inputName.getText().toString().split(" ");
+                korisnik.firstName = usernameSplit[0];
+                korisnik.lastName = usernameSplit.length>1?usernameSplit[1]:"";
+                korisnik.email = inputEmail.getText().toString();
+                korisnik.phone = inputPh.getText().toString();
+                korisnik.address = inputLoc.getText().toString();
+
+                //TODO SAVE KORISNIK INTO DATABASE
+                mainScrollView.fullScroll(ScrollView.FOCUS_UP);
 
             }
         });
