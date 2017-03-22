@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import mihajlo.asc.hr.capio.R;
+import mihajlo.asc.hr.capio.Util.ImageLoadTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +25,7 @@ public class ProfileFragment extends Fragment {
     EditText inputEmail;
     EditText inputPh;
     EditText inputLoc;
+    ImageView imgView;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -44,10 +47,12 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d("MyApp","I am here");
         view =  inflater.inflate(R.layout.fragment_profile, container, false);
-         inputName  = (EditText) view.findViewById(R.id.editText);
-         inputEmail  = (EditText) view.findViewById(R.id.editText7);
-         inputPh  = (EditText) view.findViewById(R.id.editText6);
-         inputLoc  = (EditText) view.findViewById(R.id.editText8);
+        inputName  = (EditText) view.findViewById(R.id.editText);
+        inputEmail  = (EditText) view.findViewById(R.id.editText7);
+        inputPh  = (EditText) view.findViewById(R.id.editText6);
+        inputLoc  = (EditText) view.findViewById(R.id.editText8);
+        imgView = (ImageView) view.findViewById(R.id.imageView);
+
         UserInfo theUser = new UserInfo();
         theUser.username = "Ivica Kicmanovic";
         theUser.phone = "+385 91 012 3456";
@@ -56,6 +61,7 @@ public class ProfileFragment extends Fragment {
 
         //
 
+        new ImageLoadTask("https://scontent.fbud2-1.fna.fbcdn.net/v/t1.0-0/s180x540/13450928_10207925640913360_8744975013157801860_n.jpg?oh=a4a8ede668ab3b66e243ae9ddb33a81d&oe=596BEE84", imgView).execute();
 
         inputName.setText(theUser.username,TextView.BufferType.EDITABLE);
 
@@ -80,14 +86,8 @@ public class ProfileFragment extends Fragment {
 
 
         Button logoutButton = (Button) view.findViewById(R.id.button2);
-        logoutButton.setOnClickListener( new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
 
-            }
-        });
 
         return view;
     }
