@@ -38,6 +38,7 @@ import android.widget.ViewAnimator;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,7 @@ import mihajlo.asc.hr.capio.Fragments.RealEstateFragment;
 import mihajlo.asc.hr.capio.Fragments.dummy.DummyContent;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
+import mihajlo.asc.hr.capio.Slider.logger.Log;
 import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
 
 /**
@@ -70,7 +72,7 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
      * A {@link ViewPager} which will be used in conjunction with the {@link SlidingTabLayout} above.
      */
     private ViewPager mViewPager;
-
+    private User korisnik;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,12 +96,30 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             goToLoginActivity();
         }
 
+
+        // TODO napraviti User klasu da bude bolji kod
+        Bundle bundle = getIntent().getExtras();
+        String pictureURL = bundle.getString("pictureURL");
+        String firstName = bundle.getString("firstName");
+        String lastName = bundle.getString("lastName");
+        String email = bundle.getString("email");
+        String birthday = bundle.getString("birthday");
+        String gender = bundle.getString("gender");
+
+        korisnik = new User("1",firstName,lastName,pictureURL,birthday,"0911234567","Kneza Mihajla 3",email,gender);
+
+
+
+
+
+
     }
 
     private void goToLoginActivity() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void logout(View view) {
@@ -127,14 +147,19 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
                 R.drawable.ic_profile
         };
 
-        private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
-            add(new RealEstateFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
-            add(new MapFragment());
-            add(new ProfileFragment());
-        }};
+        private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
+
+
 
         public SamplePagerAdapter(FragmentManager fm) {
             super(fm);
+            Bundle bundleUser = new Bundle();
+            bundleUser.putString("Korisnik",new Gson().toJson(korisnik));
+            ProfileFragment tmpProfileFragment = new ProfileFragment();
+            tmpProfileFragment.setArguments(bundleUser);
+            fragments.add(new MapFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            fragments.add(new MapFragment());
+            fragments.add(tmpProfileFragment); //
         }
 
         /**
