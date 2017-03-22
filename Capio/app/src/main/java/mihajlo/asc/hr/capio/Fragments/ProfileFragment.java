@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import mihajlo.asc.hr.capio.Models.User;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Util.ImageLoadTask;
 
@@ -21,25 +22,22 @@ import mihajlo.asc.hr.capio.Util.ImageLoadTask;
 public class ProfileFragment extends Fragment {
 
     private View view;
-    EditText inputName;
-    EditText inputEmail;
-    EditText inputPh;
-    EditText inputLoc;
-    ImageView imgView;
+    private EditText inputName;
+    private EditText inputEmail;
+    private EditText inputPh;
+    private EditText inputLoc;
+    private ImageView imgView;
+    private User korisnik;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-    private class UserInfo{
-        public String username;
-        public String phone;
-        public String address;
-        public String email;
-
-        public UserInfo(){
-
-        }
+    public ProfileFragment(User korisnik) {
+       this.korisnik = korisnik;
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,26 +51,22 @@ public class ProfileFragment extends Fragment {
         inputLoc  = (EditText) view.findViewById(R.id.editText8);
         imgView = (ImageView) view.findViewById(R.id.imageView);
 
-        UserInfo theUser = new UserInfo();
-        theUser.username = "Ivica Kicmanovic";
-        theUser.phone = "+385 91 012 3456";
-        theUser.address = "Unska 3, Zagreb";
-        theUser.email = "ivica.kicmanovic@efzg.com";
+
 
         //
 
-        new ImageLoadTask("https://scontent.fbud2-1.fna.fbcdn.net/v/t1.0-0/s180x540/13450928_10207925640913360_8744975013157801860_n.jpg?oh=a4a8ede668ab3b66e243ae9ddb33a81d&oe=596BEE84", imgView).execute();
+        new ImageLoadTask(korisnik.imgUrl, imgView).execute();
 
-        inputName.setText(theUser.username,TextView.BufferType.EDITABLE);
-
-
-        inputEmail.setText(theUser.email);
+        inputName.setText(korisnik.firstName+" "+korisnik.lastName,TextView.BufferType.EDITABLE);
 
 
-        inputPh.setText(theUser.phone);
+        inputEmail.setText(korisnik.email);
 
 
-        inputLoc.setText(theUser.address);
+        inputPh.setText(korisnik.phone);
+
+
+        inputLoc.setText(korisnik.address);
 
         Button saveButton = (Button) view.findViewById(R.id.button3);
         saveButton.setOnClickListener( new View.OnClickListener() {

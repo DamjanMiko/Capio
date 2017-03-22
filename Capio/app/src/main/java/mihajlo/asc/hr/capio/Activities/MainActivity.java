@@ -43,6 +43,7 @@ import java.util.ArrayList;
 
 import mihajlo.asc.hr.capio.Fragments.MapFragment;
 import mihajlo.asc.hr.capio.Fragments.ProfileFragment;
+import mihajlo.asc.hr.capio.Models.User;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
 import mihajlo.asc.hr.capio.Slider.logger.Log;
@@ -69,7 +70,7 @@ public class MainActivity extends SampleActivityBase {
      * A {@link ViewPager} which will be used in conjunction with the {@link SlidingTabLayout} above.
      */
     private ViewPager mViewPager;
-
+    private User korisnik;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +104,9 @@ public class MainActivity extends SampleActivityBase {
         String birthday = bundle.getString("birthday");
         String gender = bundle.getString("gender");
 
+        korisnik = new User("1",firstName,lastName,pictureURL,birthday,"0911234567","Kneza Mihajla 3",email,gender);
+
+
     }
 
     private void goToLoginActivity() {
@@ -135,7 +139,7 @@ public class MainActivity extends SampleActivityBase {
         private ArrayList<Fragment> fragments = new ArrayList<Fragment>() {{
             add(new ProfileFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
             add(new MapFragment());
-            add(new ProfileFragment()); // TODO u konstruktor dodati podatke dohvaćene iz Bundle
+            add(new ProfileFragment(korisnik)); // TODO u konstruktor dodati podatke dohvaćene iz Bundle
         }};
 
         public SamplePagerAdapter(FragmentManager fm) {
