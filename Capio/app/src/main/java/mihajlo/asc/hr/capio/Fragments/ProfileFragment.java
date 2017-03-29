@@ -62,8 +62,12 @@ public class ProfileFragment extends Fragment {
 
         inputName.setText(korisnik.firstName+" "+korisnik.lastName,TextView.BufferType.EDITABLE);
 
+        if(!korisnik.email.equals("|")){
+            inputEmail.setText(korisnik.email);
+        }else{
+            inputEmail.setText("");
+        }
 
-        inputEmail.setText(korisnik.email);
 
         if(!korisnik.phone.equals("|")){
             inputPh.setText(korisnik.phone);
@@ -92,6 +96,7 @@ public class ProfileFragment extends Fragment {
                 korisnik.address = inputLoc.getText().toString();
 
                 //TODO SAVE KORISNIK INTO DATABASE
+
                 mainScrollView.fullScroll(ScrollView.FOCUS_UP);
 
             }
