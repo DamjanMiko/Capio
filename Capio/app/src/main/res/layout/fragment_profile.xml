@@ -15,9 +15,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="144dp"
-        android:layout_height="137dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:background="#777777"
         android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_profile"
+        android:padding="10dp"
         app:srcCompat="@drawable/ic_profile" />
 
 
