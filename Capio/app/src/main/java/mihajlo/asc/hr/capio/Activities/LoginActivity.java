@@ -77,7 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.fail_login, Toast.LENGTH_SHORT).show();
             }
         };
-        loginButton.setReadPermissions("user_friends");
+        loginButton.setReadPermissions((Arrays.asList(
+                "public_profile", "email", "user_birthday", "user_friends")));
+
         loginButton.registerCallback(callbackManager, callback);
 
     }
@@ -113,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
     private void nextActivity(Profile profile){
         if(profile != null){
             Intent main = new Intent(LoginActivity.this, MainActivity.class);
+            main.putExtra("userId", profile.getId());
             main.putExtra("name", profile.getFirstName());
             main.putExtra("surname", profile.getLastName());
             main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());

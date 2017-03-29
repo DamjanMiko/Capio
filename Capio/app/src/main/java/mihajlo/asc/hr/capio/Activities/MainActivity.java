@@ -81,14 +81,13 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         setContentView(R.layout.activity_main);
 
         Bundle inBundle = getIntent().getExtras();
+        String userId = inBundle.get("userId").toString();
         String name = inBundle.get("name").toString();
         String surname = inBundle.get("surname").toString();
         String imageUrl = inBundle.get("imageUrl").toString();
-        Log.e("ime", name);
-        Log.e("prezime", surname);
-        Log.e("url", imageUrl);
+        Log.e("id", userId);
 
-        korisnik = new User("",name,surname,imageUrl,"","","","","");
+        korisnik = new User("|",name,surname,imageUrl,"|","|","|","|","|");
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
