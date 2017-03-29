@@ -73,12 +73,22 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
      * A {@link ViewPager} which will be used in conjunction with the {@link SlidingTabLayout} above.
      */
     private ViewPager mViewPager;
-    private User korisnik;
+    public User korisnik;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_main);
+
+        Bundle inBundle = getIntent().getExtras();
+        String name = inBundle.get("name").toString();
+        String surname = inBundle.get("surname").toString();
+        String imageUrl = inBundle.get("imageUrl").toString();
+        Log.e("ime", name);
+        Log.e("prezime", surname);
+        Log.e("url", imageUrl);
+
+        korisnik = new User("1",name,surname,imageUrl,"birthday","0911234567","Kneza Mihajla 3","email","gender");
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
@@ -96,15 +106,6 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
 
 
         // TODO napraviti User klasu da bude bolji kod
-        Bundle inBundle = getIntent().getExtras();
-        String name = inBundle.get("name").toString();
-        String surname = inBundle.get("surname").toString();
-        String imageUrl = inBundle.get("imageUrl").toString();
-        Log.e("ime", name);
-        Log.e("prezime", surname);
-        Log.e("url", imageUrl);
-
-        korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
 
 
     }
@@ -143,7 +144,7 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         public SamplePagerAdapter(FragmentManager fm) {
             super(fm);
             Bundle bundleUser = new Bundle();
-            korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
+            //korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
 
             bundleUser.putString("Korisnik",korisnik.toString());
             ProfileFragment tmpProfileFragment = new ProfileFragment();
