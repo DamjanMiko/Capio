@@ -88,7 +88,7 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         Log.e("prezime", surname);
         Log.e("url", imageUrl);
 
-        korisnik = new User("",name,surname,imageUrl,"","","","","");
+        korisnik = new User("|",name,surname,imageUrl,"|","|","|","|","|");
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items

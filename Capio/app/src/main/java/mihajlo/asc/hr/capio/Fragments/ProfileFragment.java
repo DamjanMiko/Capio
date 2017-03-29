@@ -65,11 +65,19 @@ public class ProfileFragment extends Fragment {
 
         inputEmail.setText(korisnik.email);
 
+        if(!korisnik.phone.equals("|")){
+            inputPh.setText(korisnik.phone);
+        }else{
+            inputPh.setText("");
+        }
 
-        inputPh.setText(korisnik.phone);
 
+        if(!korisnik.address.equals("|")){
+            inputLoc.setText(korisnik.address);
+        }else{
+            inputLoc.setText("");
+        }
 
-        inputLoc.setText(korisnik.address);
 
         Button saveButton = (Button) view.findViewById(R.id.button3);
         saveButton.setOnClickListener( new View.OnClickListener() {
