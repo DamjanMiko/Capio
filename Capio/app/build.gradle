@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "mihajlo.asc.hr.capio"
         minSdkVersion 17
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -16,6 +16,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
     }
 }
 
@@ -32,7 +39,10 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'com.google.android.gms:play-services-maps:10.2.0'
-    testCompile 'junit:junit:4.12'
     compile 'com.facebook.android:facebook-android-sdk:4.18.0'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    testCompile 'junit:junit:4.12'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
 }

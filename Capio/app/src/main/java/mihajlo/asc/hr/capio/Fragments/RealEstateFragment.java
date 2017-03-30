@@ -10,10 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent;
+import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent.RealEstateItem;
 import mihajlo.asc.hr.capio.Adapters.MyRealEstateRecyclerViewAdapter;
+import mihajlo.asc.hr.capio.HttpRequests.AllUnitsTask;
+import mihajlo.asc.hr.capio.Models.Unit;
 import mihajlo.asc.hr.capio.R;
-import mihajlo.asc.hr.capio.Fragments.dummy.DummyContent;
-import mihajlo.asc.hr.capio.Fragments.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
@@ -25,6 +29,7 @@ public class RealEstateFragment extends Fragment {
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private boolean firstTime = true;
 
     private OnListFragmentInteractionListener mListener;
 
@@ -49,13 +54,25 @@ public class RealEstateFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            if (firstTime) {
+                new AllUnitsTask(new AllUnitsTask.AsynResponse() {
+                    @Override
+                    public void processFinish(List<Unit> output) {
+                        RealEstateContent.addItems(output);
+                        recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
+                        firstTime = false;
+                    }
+                }).execute();
+            } else {
+                recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
+            }
+
         }
         return view;
     }
@@ -90,6 +107,6 @@ public class RealEstateFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(RealEstateItem item);
     }
 }

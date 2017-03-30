@@ -36,10 +36,11 @@ import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 
+import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent;
+import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent.RealEstateItem;
 import mihajlo.asc.hr.capio.Fragments.MapFragment;
 import mihajlo.asc.hr.capio.Fragments.ProfileFragment;
 import mihajlo.asc.hr.capio.Fragments.RealEstateFragment;
-import mihajlo.asc.hr.capio.Fragments.dummy.DummyContent;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
 import mihajlo.asc.hr.capio.Models.User;
@@ -113,7 +114,7 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
 
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(RealEstateItem item) {
         //TODO implementirat
     }
 
