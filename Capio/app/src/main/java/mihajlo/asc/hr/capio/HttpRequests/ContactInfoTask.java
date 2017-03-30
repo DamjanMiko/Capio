@@ -1,36 +1,42 @@
 package mihajlo.asc.hr.capio.HttpRequests;
 
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import mihajlo.asc.hr.capio.Models.ContactInfo;
-import mihajlo.asc.hr.capio.Models.ContactInfoList;
+import mihajlo.asc.hr.capio.Util.Settings;
 
 /**
  * Created by Damjan on 3/29/2017.
  */
 
-public class ContactInfoTask extends AsyncTask<Void, Void, ContactInfoList> {
+public class ContactInfoTask extends AsyncTask<Void, Void, List<ContactInfo>> {
 
-    private String host = "http://capio.herokuapp.com";
+
     private final String partOfUrl = "/contactinfo";
 
+    public interface AsynResponse {
+        void processFinish(List<ContactInfo> output);
+    }
+
+    AsynResponse asynResponse = null;
+
+    public ContactInfoTask(AsynResponse asynResponse) {
+        this.asynResponse = asynResponse;
+    }
+
+
     @Override
-    protected ContactInfoList doInBackground(Void... params) {
+    protected List<ContactInfo> doInBackground(Void... params) {
         try {
-            String url = "http://" + host + partOfUrl;
+            String url = Settings.host + partOfUrl;
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
@@ -41,9 +47,14 @@ public class ContactInfoTask extends AsyncTask<Void, Void, ContactInfoList> {
 //            headers.setContentType(MediaType.APPLICATION_JSON);
 //            HttpEntity<JsonSendObject> entity = new HttpEntity<>(requestBody, headers);
 
-            ResponseEntity<ContactInfoList> response = restTemplate.exchange(url, HttpMethod.GET, null, ContactInfoList.class);
+            ContactInfo[] forNow = restTemplate.getForObject(url, ContactInfo[].class);
+            List<ContactInfo> searchList = new ArrayList<>();
+            searchList = Arrays.asList(forNow);
 
-            return response.getBody();
+//            ResponseEntity<ContactInfoList> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<ContactInfo>>() {
+//            });
+
+            return searchList;
         } catch (Exception e) {
             Log.e("MainActivity", e.getMessage(), e);
         }
@@ -51,11 +62,12 @@ public class ContactInfoTask extends AsyncTask<Void, Void, ContactInfoList> {
     }
 
     @Override
-    protected void onPostExecute(ContactInfoList result) {
+    protected void onPostExecute(List<ContactInfo> result) {
         if (result == null) {
             Log.i("zajeb", "null");
             return;
         }
+        asynResponse.processFinish(result);
 //
 //        if (result.isSuccess()) {
 //            txtSuccess.setTextColor(Color.BLUE);
