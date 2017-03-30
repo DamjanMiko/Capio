@@ -19,17 +19,14 @@ public class UserByIdTask extends AsyncTask<Void, Void, UserObject> {
     private final String partOfUrl = "/users";
     private String id;
 
-    public UserByIdTask(String id) {
-        this.id = id;
-    }
-
     public interface AsynResponse {
         void processFinish(UserObject output);
     }
 
     UserByIdTask.AsynResponse asynResponse = null;
 
-    public UserByIdTask(UserByIdTask.AsynResponse asynResponse) {
+    public UserByIdTask(String id, UserByIdTask.AsynResponse asynResponse) {
+        this.id = id;
         this.asynResponse = asynResponse;
     }
 

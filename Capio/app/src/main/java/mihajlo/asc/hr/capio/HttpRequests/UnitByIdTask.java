@@ -20,17 +20,14 @@ public class UnitByIdTask extends AsyncTask<Void, Void, Unit> {
     private final String partOfUrl = "/units";
     private String id;
 
-    public UnitByIdTask(String id) {
-        this.id = id;
-    }
-
     public interface AsynResponse {
         void processFinish(Unit output);
     }
 
     UnitByIdTask.AsynResponse asynResponse = null;
 
-    public UnitByIdTask(UnitByIdTask.AsynResponse asynResponse) {
+    public UnitByIdTask(String id, UnitByIdTask.AsynResponse asynResponse) {
+        this.id = id;
         this.asynResponse = asynResponse;
     }
 

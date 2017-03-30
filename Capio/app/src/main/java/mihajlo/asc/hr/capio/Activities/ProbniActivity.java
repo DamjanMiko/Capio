@@ -41,23 +41,20 @@ public class ProbniActivity extends AppCompatActivity {
         new AllUnitsTask(new AllUnitsTask.AsynResponse() {
             @Override
             public void processFinish(List<Unit> output) {
-                int i = 10;
                 // you can go here
             }
         }).execute();
 
-        new UserByIdTask(new UserByIdTask.AsynResponse() {
+        new UserByIdTask("1", new UserByIdTask.AsynResponse() {
             @Override
             public void processFinish(UserObject output) {
-                int i = 10;
                 // you can go here
             }
         }).execute();
 
-        new UnitByIdTask(new UnitByIdTask.AsynResponse() {
+        new UnitByIdTask("1", new UnitByIdTask.AsynResponse() {
             @Override
             public void processFinish(Unit output) {
-                int i = 10;
                 // you can go here
             }
         }).execute();
