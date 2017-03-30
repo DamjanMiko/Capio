@@ -23,22 +23,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ViewAnimator;
 
-import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -48,7 +42,6 @@ import mihajlo.asc.hr.capio.Fragments.RealEstateFragment;
 import mihajlo.asc.hr.capio.Fragments.dummy.DummyContent;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Slider.activities.SampleActivityBase;
-import mihajlo.asc.hr.capio.Slider.logger.Log;
 import mihajlo.asc.hr.capio.Models.User;
 import mihajlo.asc.hr.capio.Slider.view.SlidingTabLayout;
 
@@ -85,9 +78,11 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         String name = inBundle.get("name").toString();
         String surname = inBundle.get("surname").toString();
         String imageUrl = inBundle.get("imageUrl").toString();
-        Log.e("id", userId);
+        String birthday = inBundle.get("birthday").toString();
+        String email = inBundle.get("email").toString();
+        String gender = inBundle.get("gender").toString();
 
-        korisnik = new User("|",name,surname,imageUrl,"|","|","|","|","|");
+        korisnik = new User(userId, name, surname, imageUrl, birthday, "|", "|", email, gender);
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
