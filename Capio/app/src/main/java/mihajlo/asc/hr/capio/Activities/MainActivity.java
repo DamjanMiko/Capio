@@ -73,11 +73,22 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
      * A {@link ViewPager} which will be used in conjunction with the {@link SlidingTabLayout} above.
      */
     private ViewPager mViewPager;
-    private User korisnik;
+    public User korisnik;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_main);
+
+        Bundle inBundle = getIntent().getExtras();
+        String name = inBundle.get("name").toString();
+        String surname = inBundle.get("surname").toString();
+        String imageUrl = inBundle.get("imageUrl").toString();
+        Log.e("ime", name);
+        Log.e("prezime", surname);
+        Log.e("url", imageUrl);
+
+        korisnik = new User("|",name,surname,imageUrl,"|","|","|","|","|");
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
@@ -93,39 +104,17 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
 
-        if(AccessToken.getCurrentAccessToken() == null) {
-            goToLoginActivity();
-        }
-
 
         // TODO napraviti User klasu da bude bolji kod
-//        Bundle bundle = getIntent().getExtras();
-//        String pictureURL = bundle.getString("pictureURL");
-//        String firstName = bundle.getString("firstName");
-//        String lastName = bundle.getString("lastName");
-//        String email = bundle.getString("email");
-//        String birthday = bundle.getString("birthday");
-//        String gender = bundle.getString("gender");
-
-        korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
 
 
-
-
-
-
-    }
-
-    private void goToLoginActivity() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
     }
 
     public void logout(View view) {
         LoginManager.getInstance().logOut();
-        goToLoginActivity();
+        Intent login = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(login);
+        finish();
     }
 
 
@@ -155,7 +144,7 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         public SamplePagerAdapter(FragmentManager fm) {
             super(fm);
             Bundle bundleUser = new Bundle();
-            korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
+            //korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
 
             bundleUser.putString("Korisnik",korisnik.toString());
             ProfileFragment tmpProfileFragment = new ProfileFragment();

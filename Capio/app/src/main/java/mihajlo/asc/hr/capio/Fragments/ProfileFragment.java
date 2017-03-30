@@ -62,14 +62,26 @@ public class ProfileFragment extends Fragment {
 
         inputName.setText(korisnik.firstName+" "+korisnik.lastName,TextView.BufferType.EDITABLE);
 
+        if(!korisnik.email.equals("|")){
+            inputEmail.setText(korisnik.email);
+        }else{
+            inputEmail.setText("");
+        }
 
-        inputEmail.setText(korisnik.email);
+
+        if(!korisnik.phone.equals("|")){
+            inputPh.setText(korisnik.phone);
+        }else{
+            inputPh.setText("");
+        }
 
 
-        inputPh.setText(korisnik.phone);
+        if(!korisnik.address.equals("|")){
+            inputLoc.setText(korisnik.address);
+        }else{
+            inputLoc.setText("");
+        }
 
-
-        inputLoc.setText(korisnik.address);
 
         Button saveButton = (Button) view.findViewById(R.id.button3);
         saveButton.setOnClickListener( new View.OnClickListener() {
@@ -83,7 +95,26 @@ public class ProfileFragment extends Fragment {
                 korisnik.phone = inputPh.getText().toString();
                 korisnik.address = inputLoc.getText().toString();
 
+                //HttpClient httpclient = HttpClientBuilder.create().build();
+                //HttpPost httppost = new HttpGet("http://capio.herokuapp.com/users");
+
                 //TODO SAVE KORISNIK INTO DATABASE
+//                HttpClient httpclient = HttpClientBuilder.create().build();
+//                HttpPost httppost = new HttpPost("http://capio.herokuapp.com/users");
+//
+//                // Request parameters and other properties.
+//                List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+//                params.add(new BasicNameValuePair("firstName", "Ivan"));
+//                params.add(new BasicNameValuePair("lastName", "Vlasic"));
+//                httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+//
+//                //Execute and get the response.
+//                HttpResponse response = httpclient.execute(httppost);
+
+
+
+                //System.out.println(response.getStatusLine().getStatusCode());
+
                 mainScrollView.fullScroll(ScrollView.FOCUS_UP);
 
             }
