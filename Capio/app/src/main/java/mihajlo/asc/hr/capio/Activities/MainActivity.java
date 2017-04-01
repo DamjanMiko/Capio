@@ -117,7 +117,9 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
 
     @Override
     public void onListFragmentInteraction(RealEstateItem item) {
-        //TODO implementirat
+        Intent intent = new Intent(MainActivity.this, RealEstateDetailActivity.class);
+        intent.putExtra("item", item);
+        startActivity(intent);
     }
 
     /**
