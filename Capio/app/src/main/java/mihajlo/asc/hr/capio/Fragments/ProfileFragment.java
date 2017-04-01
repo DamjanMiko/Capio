@@ -25,7 +25,7 @@ import mihajlo.asc.hr.capio.Util.ImageLoadTask;
 public class ProfileFragment extends Fragment {
 
     private View view;
-    private EditText inputName;
+    private TextView inputName;
     private EditText inputEmail;
     private EditText inputPh;
     private EditText inputLoc;
@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
 
         korisnik = User.fromString(KorisnikString);
         view =  inflater.inflate(R.layout.fragment_profile, container, false);
-        inputName  = (EditText) view.findViewById(R.id.editText);
+        inputName  = (TextView) view.findViewById(R.id.fullName);
         inputEmail  = (EditText) view.findViewById(R.id.editText7);
         inputPh  = (EditText) view.findViewById(R.id.editText6);
         inputLoc  = (EditText) view.findViewById(R.id.editText8);
@@ -120,19 +120,11 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
-        Button logoutButton = (Button) view.findViewById(R.id.button2);
-
-
-
         return view;
     }
 
     @Override
     public void onResume(){
         super.onResume();
-
-
-
     }
 }

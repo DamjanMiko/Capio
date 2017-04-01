@@ -45,4 +45,5 @@ dependencies {
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     testCompile 'junit:junit:4.12'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
