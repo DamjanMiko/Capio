@@ -26,12 +26,13 @@ public class ProfileFragment extends Fragment {
 
     private View view;
     private TextView inputName;
-    private EditText inputEmail;
-    private EditText inputPh;
-    private EditText inputLoc;
+    private TextView inputEmail;
+    private TextView inputMobile;
+    private TextView inputAddress;
     private ImageView imgView;
+    private TextView inputCity;
     private User korisnik;
-    private ScrollView mainScrollView;
+//    private ScrollView mainScrollView;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -47,20 +48,21 @@ public class ProfileFragment extends Fragment {
         String KorisnikString = getArguments().getString("Korisnik");
 
         korisnik = User.fromString(KorisnikString);
-        view =  inflater.inflate(R.layout.fragment_profile, container, false);
-        inputName  = (TextView) view.findViewById(R.id.fullName);
-        inputEmail  = (EditText) view.findViewById(R.id.emailEditText);
-        inputPh  = (EditText) view.findViewById(R.id.phoneEditText);
-        inputLoc  = (EditText) view.findViewById(R.id.locationEditText);
-        imgView = (ImageView) view.findViewById(R.id.imageView);
-        mainScrollView = (ScrollView) view.findViewById(R.id.scrollView);
+        view =  inflater.inflate(R.layout.profile, container, false);
+        inputName = (TextView) view.findViewById(R.id.fullName);
+        inputEmail = (TextView) view.findViewById(R.id.email);
+        inputMobile  = (TextView) view.findViewById(R.id.mobile);
+        inputAddress  = (TextView) view.findViewById(R.id.address);
+        inputCity = (TextView) view.findViewById(R.id.city);
+        imgView = (ImageView) view.findViewById(R.id.profile_img);
+//        mainScrollView = (ScrollView) view.findViewById(R.id.scrollView);
         //setArguments(new Bundle());
 
         //
 
         new ImageLoadTask(korisnik.imgUrl, imgView).execute();
 
-        inputName.setText(korisnik.firstName+" "+korisnik.lastName,TextView.BufferType.EDITABLE);
+        inputName.setText(korisnik.firstName+" "+korisnik.lastName);
 
         if(!korisnik.email.equals("|")){
             inputEmail.setText(korisnik.email);
@@ -70,30 +72,36 @@ public class ProfileFragment extends Fragment {
 
 
         if(!korisnik.phone.equals("|")){
-            inputPh.setText(korisnik.phone);
+            inputMobile.setText(korisnik.phone);
         }else{
-            inputPh.setText("");
+            inputMobile.setText("");
         }
 
 
         if(!korisnik.address.equals("|")){
-            inputLoc.setText(korisnik.address);
+            inputAddress.setText(korisnik.address);
         }else{
-            inputLoc.setText("");
+            inputAddress.setText("");
+        }
+
+        if(!korisnik.city.equals("|")){
+            inputCity.setText(korisnik.city);
+        }else{
+            inputCity.setText("");
         }
 
 
-        Button saveButton = (Button) view.findViewById(R.id.button3);
-        saveButton.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String[] usernameSplit = inputName.getText().toString().split(" ");
-                korisnik.firstName = usernameSplit[0];
-                korisnik.lastName = usernameSplit.length>1?usernameSplit[1]:"";
-                korisnik.email = inputEmail.getText().toString();
-                korisnik.phone = inputPh.getText().toString();
-                korisnik.address = inputLoc.getText().toString();
+//        Button saveButton = (Button) view.findViewById(R.id.button3);
+//        saveButton.setOnClickListener( new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                String[] usernameSplit = inputName.getText().toString().split(" ");
+//                korisnik.firstName = usernameSplit[0];
+//                korisnik.lastName = usernameSplit.length>1?usernameSplit[1]:"";
+//                korisnik.email = inputEmail.getText().toString();
+//                korisnik.phone = inputPh.getText().toString();
+//                korisnik.address = inputLoc.getText().toString();
 
                 //HttpClient httpclient = HttpClientBuilder.create().build();
                 //HttpPost httppost = new HttpGet("http://capio.herokuapp.com/users");
@@ -115,10 +123,10 @@ public class ProfileFragment extends Fragment {
 
                 //System.out.println(response.getStatusLine().getStatusCode());
 
-                mainScrollView.fullScroll(ScrollView.FOCUS_UP);
+//                mainScrollView.fullScroll(ScrollView.FOCUS_UP);
 
-            }
-        });
+//            }
+//        });
 
         return view;
     }

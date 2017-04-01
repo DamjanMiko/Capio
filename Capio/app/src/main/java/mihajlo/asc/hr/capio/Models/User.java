@@ -14,8 +14,9 @@ public class User {
     public String address;
     public String email;
     public String gender;
+    public String city;
 
-    public User(String id,String firstName,String lastName, String imgUrl, String dateOfBirth, String phone,String address,String email,String gender){
+    public User(String id,String firstName,String lastName, String imgUrl, String dateOfBirth, String phone,String address, String city, String email,String gender){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,15 +26,16 @@ public class User {
         this.address = address;
         this.email = email;
         this.gender = gender;
+        this.city = city;
     }
 
     @Override
     public String toString() {
-        return id+";"+firstName+";"+lastName+";"+imgUrl+";"+dateOfBirth+";"+phone+";"+address+";"+email+";"+gender;
+        return id+";"+firstName+";"+lastName+";"+imgUrl+";"+dateOfBirth+";"+phone+";"+address+";"+city+";"+email+";"+gender;
     }
 
     public static User fromString(String userString){
         String[] s = userString.split(";");
-        return new User(s[0],s[1],s[2],s[3],s[4],s[5],s[6],s[7],s[8]);
+        return new User(s[0],s[1],s[2],s[3],s[4],s[5],s[6],s[7],s[8], s[9]);
     }
 }

@@ -71,19 +71,21 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this);
+//        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_main);
 
-        Bundle inBundle = getIntent().getExtras();
-        String userId = inBundle.get("userId").toString();
-        String name = inBundle.get("name").toString();
-        String surname = inBundle.get("surname").toString();
-        String imageUrl = inBundle.get("imageUrl").toString();
-        String birthday = inBundle.get("birthday").toString();
-        String email = inBundle.get("email").toString();
-        String gender = inBundle.get("gender").toString();
-
-        korisnik = new User(userId, name, surname, imageUrl, birthday, "|", "|", email, gender);
+//        Bundle inBundle = getIntent().getExtras();
+//        String userId = inBundle.get("userId").toString();
+//        String name = inBundle.get("name").toString();
+//        String surname = inBundle.get("surname").toString();
+//        String imageUrl = inBundle.get("imageUrl").toString();
+//        String birthday = inBundle.get("birthday").toString();
+//        String email = inBundle.get("email").toString();
+//        String gender = inBundle.get("gender").toString();
+//
+//        korisnik = new User(userId, name, surname, imageUrl, birthday, "|", "|", email, gender);
+        korisnik = new User("1", "Jack", "Black", "https://images-na.ssl-images-amazon.com/images/M/MV5BMjE2MjI4NTQxN15BMl5BanBnXkFtZTgwMDMyMDg4NTE@._V1_UY317_CR18,0,214,317_AL_.jpg",
+                "02.11.1994", "+385996968018", "Irkutsk 56", "Russia", "jack.black@gmail.com", "M");
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
