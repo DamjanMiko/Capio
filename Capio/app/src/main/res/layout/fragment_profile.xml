@@ -44,74 +44,127 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="35dp"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="italic" />
+            android:orientation="horizontal"
+            android:weightSum="7">
 
-        <EditText
-            android:id="@+id/editText7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="john.doe@gmail.com"
-            android:layout_margin="5dp"
-            android:inputType="textEmailAddress"
-            android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="35dp"
-            android:text="Phone number"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="italic" />
 
-        <EditText
-            android:id="@+id/editText6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_margin="5dp"
-            android:hint="+385 91 123 4567"
-            android:inputType="phone"
-            android:textAlignment="center" />
+            <TextView
+                android:layout_weight="5"
+                android:id="@+id/emailTextView"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email_text"
+                android:textColor="#a2a1b8"
+                android:maxLength="12"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="start"/>
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="35dp"
-            android:text="Your location "
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="italic" />
 
-        <EditText
-            android:id="@+id/editText8"
+            <EditText
+                android:layout_weight="2"
+                android:id="@+id/emailEditText"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:hint="@string/email_missing_hint"
+                android:gravity="end"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_margin="5dp"
-            android:hint="Enter your address "
-            android:inputType="textPostalAddress"
-            android:textAlignment="center" />
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+
+
+            <TextView
+                android:layout_weight="5"
+                android:id="@+id/phoneTextView"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_text"
+                android:textColor="#a2a1b8"
+                android:maxLength="12"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="start"/>
+
+
+            <EditText
+                android:layout_weight="2"
+                android:id="@+id/phoneEditText"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:hint="@string/phone_missing_hint"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+
+
+            <TextView
+                android:layout_weight="5"
+                android:id="@+id/locationTextView"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/location_text"
+                android:textColor="#a2a1b8"
+                android:maxLength="12"
+                android:background="#0000"
+                android:padding="16dp"
+                android:gravity="start"/>
+
+
+            <EditText
+                android:layout_weight="2"
+                android:id="@+id/locationEditText"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#181737"
+                android:background="#0000"
+                android:padding="16dp"
+                android:hint="@string/location_missing_hint"
+                android:gravity="end"
+                android:inputType="textPostalAddress" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dad8d8"/>
 
         <Button
             android:id="@+id/button3"

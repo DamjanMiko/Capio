@@ -49,9 +49,9 @@ public class ProfileFragment extends Fragment {
         korisnik = User.fromString(KorisnikString);
         view =  inflater.inflate(R.layout.fragment_profile, container, false);
         inputName  = (TextView) view.findViewById(R.id.fullName);
-        inputEmail  = (EditText) view.findViewById(R.id.editText7);
-        inputPh  = (EditText) view.findViewById(R.id.editText6);
-        inputLoc  = (EditText) view.findViewById(R.id.editText8);
+        inputEmail  = (EditText) view.findViewById(R.id.emailEditText);
+        inputPh  = (EditText) view.findViewById(R.id.phoneEditText);
+        inputLoc  = (EditText) view.findViewById(R.id.locationEditText);
         imgView = (ImageView) view.findViewById(R.id.imageView);
         mainScrollView = (ScrollView) view.findViewById(R.id.scrollView);
         //setArguments(new Bundle());
