@@ -15,6 +15,8 @@ public class UserObject {
     private Location location;
     private List<Unit> ownedUnits;
 
+    public UserObject() {}
+
     public UserObject(Long id, String firstName, String lastName, ContactInfo contactInfo, Location location, List<Unit> ownedUnits) {
         this.id = id;
         this.firstName = firstName;

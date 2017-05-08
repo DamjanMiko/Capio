@@ -16,6 +16,8 @@ public class Unit {
     private Location location;
     private List<Image> images;
 
+    public Unit() {}
+
     public Unit(Long id, String description, float price, float area, boolean rent, Location location, List<Image> images) {
         this.id = id;
         this.description = description;
