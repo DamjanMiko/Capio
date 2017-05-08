@@ -103,5 +103,9 @@ public class RealEstateContent {
             out.writeString(backgroundUrl);
             out.writeParcelable(unit, flags);
         }
+
+        public ParcelableUnit getUnit() {
+            return unit;
+        }
     }
 }

@@ -12,6 +12,12 @@ public class Image {
     private Blob img;
     private String url;
 
+    public Image(Long id, Blob img, String url) {
+        this.id = id;
+        this.img = img;
+        this.url = url;
+    }
+
     public Long getId() {
         return id;
     }

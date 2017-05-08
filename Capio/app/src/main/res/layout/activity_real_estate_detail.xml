@@ -7,10 +7,27 @@
     android:layout_height="match_parent"
     tools:context="mihajlo.asc.hr.capio.Activities.RealEstateDetailActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/mvieww"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mvieww"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+        <TextView
+            android:id="@+id/textPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1750 kn/mj"
+            android:textColor="@color/whiteText"
+            android:textSize="@dimen/text_medium"
+            />
+
+    </LinearLayout>
+
+
 
     <ScrollView
         android:layout_width="match_parent"

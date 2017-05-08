@@ -8,6 +8,7 @@ import android.view.Window;
 
 import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent.RealEstateItem;
 import mihajlo.asc.hr.capio.Adapters.ImageAdapter;
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableUnit;
 import mihajlo.asc.hr.capio.R;
 
 public class RealEstateDetailActivity extends AppCompatActivity {
@@ -22,7 +23,9 @@ public class RealEstateDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
-        int ii = 10;
+
+        ParcelableUnit unit = item.getUnit();
+        unit.getImages();
 
         viewPagerImages = (ViewPager) findViewById(R.id.mvieww);
         viewPagerImages.setAdapter(new ImageAdapter(this));
