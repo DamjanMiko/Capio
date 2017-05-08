@@ -19,6 +19,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -73,13 +74,14 @@ public class MapFragment extends Fragment {
             public void onMapReady(GoogleMap mMap) {
 
                 googleMap = mMap;
+                addMarkersToMap();
 
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
-                    LatLng babinaGreda = new LatLng(45.7964051, 15.9485657);
-                    googleMap.addMarker(new MarkerOptions().position(babinaGreda).title("Babina Greda").snippet("Molimo dozvolite lokaciju aplikaciji ili zauvijek ostanite u Babinoj Gredi!"));
-                    addMarkersToMap();
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(babinaGreda).zoom(12).build();
+                    LatLng Zagreb = new LatLng(45.815399, 15.966568);
+                    //googleMap.addMarker(new MarkerOptions().position(Zagreb).title("Babina Greda").snippet("Molimo dozvolite lokaciju aplikaciji ili zauvijek ostanite u Babinoj Gredi!"));
+
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(Zagreb).zoom(12).build();
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 }else {
@@ -118,16 +120,15 @@ public class MapFragment extends Fragment {
 
     private void addMarkersToMap() {
         // Uses a colored icon.
-        mBrisbane = googleMap.addMarker(new MarkerOptions()
-                .position(PERTH)
-                .title("FER")
-                .snippet("$2000/mo"));
+        MarkerOptions marker = new MarkerOptions().position(PERTH).title("FER").snippet("$2000/mo").icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon));
+        mBrisbane = googleMap.addMarker(marker);
 
         // Uses a custom icon with the info window popping out of the center of the icon.
         mSydney = googleMap.addMarker(new MarkerOptions()
                 .position(SYDNEY)
                 .title("FER")
                 .snippet("$420000/mo")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
                 .infoWindowAnchor(0.5f, 0.5f));
 
         // Creates a draggable marker. Long press to drag.
@@ -135,11 +136,13 @@ public class MapFragment extends Fragment {
                 .position(ALICE_SPRINGS)
                 .title("Melbourne")
                 .snippet("Population: 4,137,400")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
                 .draggable(true));
 
         mAdelaide = googleMap.addMarker(new MarkerOptions()
                 .position(ADELAIDE)
                 .title("Adelaide")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
                 .snippet("Population: 1,213,000"));
 
     }
