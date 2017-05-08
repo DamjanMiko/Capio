@@ -15,6 +15,17 @@ public class UserObject {
     private Location location;
     private List<Unit> ownedUnits;
 
+    public UserObject() {}
+
+    public UserObject(Long id, String firstName, String lastName, ContactInfo contactInfo, Location location, List<Unit> ownedUnits) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contactInfo = contactInfo;
+        this.location = location;
+        this.ownedUnits = ownedUnits;
+    }
+
     public Long getId() {
         return id;
     }

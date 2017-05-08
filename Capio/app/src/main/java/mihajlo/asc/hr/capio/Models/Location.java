@@ -13,6 +13,17 @@ public class Location {
     private String country;
     private String city;
 
+    public Location() {}
+
+    public Location(Long id, String streetName, int houseNumber, int postalCode, String country, String city) {
+        this.id = id;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.city = city;
+    }
+
     public Long getId() {
         return id;
     }

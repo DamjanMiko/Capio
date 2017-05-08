@@ -10,6 +10,14 @@ public class ContactInfo {
     private String email;
     private String phoneNumber;
 
+    public ContactInfo() {}
+
+    public ContactInfo(Long id, String email, String phoneNumber) {
+        this.id = id;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Long getId() {
         return id;
     }
