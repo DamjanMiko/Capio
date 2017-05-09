@@ -9,7 +9,8 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:paddingTop="@dimen/margin_tiny"
+                android:paddingBottom="@dimen/margin_small"
                 android:background="@color/whiteText">
 
                 <TextView
@@ -39,7 +42,7 @@
                     android:textSize="@dimen/text_large" />
 
                 <TextView
-                    android:id="@+id/address"
+                    android:id="@+id/textAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Brozova ulica 44"
@@ -48,7 +51,7 @@
                     android:textSize="@dimen/text_large" />
 
                 <TextView
-                    android:id="@+id/addressCity"
+                    android:id="@+id/textAddressCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10000 Zagreb, Hrvatska"
@@ -61,24 +64,102 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginBottom="@dimen/margin_small"
-                android:background="@color/whiteText">
+                android:background="@drawable/unit_description">
+
+                <TextView
+                    android:paddingLeft="@dimen/margin_medium"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:paddingTop="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Karakteristike"
+                    android:textColor="@color/blackText"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:id="@+id/textCijena"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_tiny"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cijena:"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:id="@+id/textKvadratura"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_tiny"
+                    android:layout_width="match_parent"
+                    android:layout_height="30sp"
+                    android:paddingTop="5sp"
+                    android:text="Kvadratura:"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:id="@+id/textBrojSoba"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_tiny"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Broj soba:"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:id="@+id/textRezije"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Prosječne režije:"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+
 
             </LinearLayout>
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginBottom="@dimen/margin_small"
-                android:background="@color/whiteText">
+                android:background="@drawable/unit_description">
 
-            </View>
+                <TextView
+                    android:paddingLeft="@dimen/margin_medium"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:paddingTop="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Opis"
+                    android:textColor="@color/blackText"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:id="@+id/textOpis"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Opis"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
