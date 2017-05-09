@@ -57,6 +57,14 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
 
     public static final String TAG = "MainActivity";
 
+    private String userId;
+    private String name;
+    private String surname;
+    private String imageUrl;
+    private String birthday;
+    private String email;
+    private String gender;
+
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
      * above, but is designed to give continuous feedback to the user when scrolling.
@@ -71,21 +79,19 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        FacebookSdk.sdkInitialize(this);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_main);
 
-//        Bundle inBundle = getIntent().getExtras();
-//        String userId = inBundle.get("userId").toString();
-//        String name = inBundle.get("name").toString();
-//        String surname = inBundle.get("surname").toString();
-//        String imageUrl = inBundle.get("imageUrl").toString();
-//        String birthday = inBundle.get("birthday").toString();
-//        String email = inBundle.get("email").toString();
-//        String gender = inBundle.get("gender").toString();
-//
-//        korisnik = new User(userId, name, surname, imageUrl, birthday, "|", "|", email, gender);
-        korisnik = new User("1", "Jack", "Black", "https://images-na.ssl-images-amazon.com/images/M/MV5BMjE2MjI4NTQxN15BMl5BanBnXkFtZTgwMDMyMDg4NTE@._V1_UY317_CR18,0,214,317_AL_.jpg",
-                "02.11.1994", "+385996968018", "Irkutsk 56", "Russia", "jack.black@gmail.com", "M");
+        Bundle inBundle = getIntent().getExtras();
+        userId = inBundle.get("userId").toString();
+        name = inBundle.get("name").toString();
+        surname = inBundle.get("surname").toString();
+        imageUrl = inBundle.get("imageUrl").toString();
+        birthday = inBundle.get("birthday").toString();
+        email = inBundle.get("email").toString();
+        gender = inBundle.get("gender").toString();
+
+        korisnik = new User(userId, name, surname, imageUrl, birthday, "|", "|", "Zagreb", email, gender);
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
@@ -114,6 +120,17 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         finish();
     }
 
+    public void openFilter(View view) {
+        Intent openFilterIntent = new Intent(MainActivity.this, FilterActivity.class);
+        openFilterIntent.putExtra("userId", userId);
+        openFilterIntent.putExtra("name",name);
+        openFilterIntent.putExtra("surname",surname);
+        openFilterIntent.putExtra("imageUrl",imageUrl);
+        openFilterIntent.putExtra("email", email);
+        openFilterIntent.putExtra("birthday", birthday);
+        openFilterIntent.putExtra("gender", gender);
+        startActivity(openFilterIntent);
+    }
 
     @Override
     public void onListFragmentInteraction(RealEstateItem item) {

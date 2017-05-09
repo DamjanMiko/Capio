@@ -19,5 +19,10 @@
     <string name="phone_text">Phone</string>
     <string name="location_missing_hint">Enter your location</string>
     <string name="location_text">Location</string>
+    <string name="filter_menu_text">FILTER</string>
+    <string name="filter">FILTER</string>
+    <string name="filter_price">Price</string>
+    <string name="set_filters_button">Set fiters</string>
+    <string name="search_button">Search</string>
 
 </resources>
