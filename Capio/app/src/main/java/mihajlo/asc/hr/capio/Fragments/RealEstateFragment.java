@@ -1,6 +1,7 @@
 package mihajlo.asc.hr.capio.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,15 +10,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.List;
 
+import mihajlo.asc.hr.capio.Activities.FilterActivity;
+import mihajlo.asc.hr.capio.Activities.LoginActivity;
+import mihajlo.asc.hr.capio.Activities.MainActivity;
 import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent;
 import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent.RealEstateItem;
 import mihajlo.asc.hr.capio.Adapters.MyRealEstateRecyclerViewAdapter;
 import mihajlo.asc.hr.capio.HttpRequests.AllUnitsTask;
 import mihajlo.asc.hr.capio.Models.Unit;
 import mihajlo.asc.hr.capio.R;
+import mihajlo.asc.hr.capio.Slider.logger.Log;
 
 /**
  * A fragment representing a list of Items.
@@ -30,6 +36,7 @@ public class RealEstateFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private boolean firstTime = true;
+    private int price = 10000;
 
     private OnListFragmentInteractionListener mListener;
 
@@ -51,6 +58,12 @@ public class RealEstateFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_realestate_list, container, false);
 
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            price = arguments.getInt("price");
+            firstTime = arguments.getBoolean("firstTime");
+        }
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -64,7 +77,7 @@ public class RealEstateFragment extends Fragment {
                 new AllUnitsTask(new AllUnitsTask.AsynResponse() {
                     @Override
                     public void processFinish(List<Unit> output) {
-                        RealEstateContent.addItems(output);
+                        RealEstateContent.addItems(output, price);
                         recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
                         firstTime = false;
                     }
@@ -74,6 +87,7 @@ public class RealEstateFragment extends Fragment {
             }
 
         }
+
         return view;
     }
 

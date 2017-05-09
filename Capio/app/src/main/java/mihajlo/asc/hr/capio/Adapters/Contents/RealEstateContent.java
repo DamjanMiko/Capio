@@ -29,16 +29,18 @@ public class RealEstateContent {
      */
     public static final Map<Long, RealEstateItem> ITEM_MAP = new HashMap<>();
 
-    public static  void addItems(List<Unit> list) {
+    public static  void addItems(List<Unit> list, int price) {
         for (Unit unit : list) {
-            Location currentLocation = unit.getLocation();
-            String location = currentLocation.getStreetName() + " " +
-                    currentLocation.getHouseNumber() + ", " + currentLocation.getCity();
-            String backgroundUrl = unit.getImages().get(0).getUrl();
+            if(unit.getPrice() < price) {
+                Location currentLocation = unit.getLocation();
+                String location = currentLocation.getStreetName() + " " +
+                        currentLocation.getHouseNumber() + ", " + currentLocation.getCity();
+                String backgroundUrl = unit.getImages().get(0).getUrl();
 
-            RealEstateItem newItem = new RealEstateItem(unit.getId(),
-                    String.valueOf(unit.getPrice()), location, backgroundUrl, new ParcelableUnit(unit));
-            addItem(newItem);
+                RealEstateItem newItem = new RealEstateItem(unit.getId(),
+                        String.valueOf(unit.getPrice()), location, backgroundUrl, new ParcelableUnit(unit));
+                addItem(newItem);
+            }
         }
     }
 
