@@ -38,6 +38,11 @@ public class RealEstateDetailActivity extends AppCompatActivity {
     private TextView textBrojSoba;
     private TextView textOpis;
 
+    private TextView textKorisnikIme;
+    private TextView textKorisnikEmail;
+    private TextView textKorisnikTelefonskiBroj;
+
+
     private UserObject ownerOfUnit;
 
     @Override
@@ -59,6 +64,10 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         textOpis = (TextView) findViewById(R.id.textOpis);
         textBrojSoba = (TextView) findViewById(R.id.textBrojSoba);
 
+        textKorisnikIme = (TextView) findViewById(R.id.textKorisnikIme);
+        textKorisnikEmail = (TextView) findViewById(R.id.textKorisnikEmail);
+        textKorisnikTelefonskiBroj = (TextView) findViewById(R.id.textKorisnikTelefonskiBroj);
+
         Intent intent = getIntent();
         RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
 
@@ -67,13 +76,6 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         setText(unit);
         viewPagerImages = (ViewPager) findViewById(R.id.mvieww);
         viewPagerImages.setAdapter(new ImageAdapter(this, unit.getImages()));
-
-        new UserByUnitIdTask(unit.getId().toString(), new UserByUnitIdTask.AsynResponse() {
-            @Override
-            public void processFinish(UserObject output) {
-                ownerOfUnit = output;
-            }
-        }).execute();
 
         btnContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +100,18 @@ public class RealEstateDetailActivity extends AppCompatActivity {
     }
 
     private void setText(ParcelableUnit unit) {
+
+        new UserByUnitIdTask(unit.getId().toString(), new UserByUnitIdTask.AsynResponse() {
+            @Override
+            public void processFinish(UserObject output) {
+                ownerOfUnit = output;
+                textKorisnikIme.setText("Ime i prezime: " + output.getFirstName() + " " + output.getLastName());
+                textKorisnikTelefonskiBroj.setText("Telefonski broj: " + output.getContactInfo().getPhoneNumber());
+                textKorisnikEmail.setText("Email: " + output.getContactInfo().getEmail());
+            }
+        }).execute();
+
+
         textPrice.setText((int) unit.getPrice() + " kn/mj");
         ParcelableLocation location = unit.getLocation();
         textAddress.setText(location.getStreetName() + " " + location.getHouseNumber());

@@ -43,11 +43,11 @@ public class UserByUnitIdTask extends AsyncTask<Void, Void, UserObject> {
             uriBuilder.appendQueryParameter("id", unitId);
             url = uriBuilder.build().toString();
 
-            UserObject[] forNow = restTemplate.getForObject(url, UserObject[].class);
+            UserObject forNow = restTemplate.getForObject(url, UserObject.class);
             if (forNow == null) {
                 return null;
             } else {
-                return forNow[0];
+                return forNow;
             }
         } catch (Exception e) {
             Log.e("UserByUnitIdTask", e.getMessage(), e);

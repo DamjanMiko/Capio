@@ -161,6 +161,59 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:background="@drawable/unit_description">
+
+                <TextView
+                    android:paddingLeft="@dimen/margin_medium"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:paddingTop="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Podaci o korisniku"
+                    android:textColor="@color/blackText"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:id="@+id/textKorisnikIme"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ime:"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:id="@+id/textKorisnikEmail"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:id="@+id/textKorisnikTelefonskiBroj"
+                    android:paddingLeft="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Telefonski broj:"
+                    android:textColor="@color/blackText"
+                    android:textSize="@dimen/text_small" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
@@ -179,8 +232,9 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kontaktiraj"
+            android:text="Kontaktiraj korisnika"
             android:gravity="center"
+            android:textColor="@color/whiteText"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
