@@ -59,7 +59,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
 
 
 
-        holder.mPriceView.setText("$" + mValues.get(position).price + "/mo");
+        holder.mPriceView.setText(mValues.get(position).price + " kn/mj");
         holder.mLocationView.setText(mValues.get(position).location);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
