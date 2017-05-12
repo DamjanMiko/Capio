@@ -1,9 +1,11 @@
 package mihajlo.asc.hr.capio.Activities;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -61,8 +64,14 @@ public class RealEstateDetailActivity extends AppCompatActivity {
     private TextView textKorisnikEmail;
     private TextView textKorisnikTelefonskiBroj;
 
+    private TextView textPicNumb;
+    private ImageView btnBack;
+
     private UserObject ownerOfUnit;
 
+    private Fragment mapView;
+    private Fragment streetView;
+    private boolean mapVisible = true;
 
     private static final String MARKER_POSITION_KEY = "MarkerPosition";
 
@@ -96,15 +105,36 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         textKorisnikEmail = (TextView) findViewById(R.id.textKorisnikEmail);
         textKorisnikTelefonskiBroj = (TextView) findViewById(R.id.textKorisnikTelefonskiBroj);
 
+        textPicNumb = (TextView) findViewById(R.id.textPicNumb);
+        btnBack = (ImageView) findViewById(R.id.btnBack);
+
         Intent intent = getIntent();
         RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
 
-        ParcelableUnit unit = item.getUnit();
+        final ParcelableUnit unit = item.getUnit();
 
         setText(unit);
         setMap(savedInstanceState, unit.getLocation());
         viewPagerImages = (ViewPager) findViewById(R.id.mvieww);
-        viewPagerImages.setAdapter(new ImageAdapter(this, unit.getImages()));
+        ImageAdapter adapter = new ImageAdapter(this, unit.getImages());
+        viewPagerImages.setAdapter(adapter);
+        viewPagerImages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                int picNumb = position + 1;
+                textPicNumb.setText(picNumb + "/" + unit.getImages().size());
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         btnContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +150,13 @@ public class RealEstateDetailActivity extends AppCompatActivity {
                     dialContactPhone(ownerOfUnit.getContactInfo().getPhoneNumber());
                 }
 
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
@@ -150,6 +187,7 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         textCijena.setText("Cijena: " + (int) unit.getPrice() + " kn/mj");
         textKvadratura.setText(Html.fromHtml("Kvadratura: " + unit.getArea() + " m" + "<sup>2</sup>"));
         textOpis.setText(unit.getDescription());
+        textPicNumb.setText("1/" + unit.getImages().size());
     }
 
     private void setMap(final Bundle savedInstanceState, ParcelableLocation location) {
@@ -171,31 +209,24 @@ public class RealEstateDetailActivity extends AppCompatActivity {
             Log.i("e", e.getMessage());
         }
 
+        streetView = getFragmentManager().findFragmentById(R.id.streetviewpanorama);
+        mapView = getFragmentManager().findFragmentById(R.id.streetviewpanorama);
 
-//        final LatLng markerPosition;
-//        if (savedInstanceState == null) {
-//            markerPosition = unitLocationCoordinate;
-//        } else {
-//            markerPosition = savedInstanceState.getParcelable(MARKER_POSITION_KEY);
-//        }
-
-//        SupportStreetViewPanoramaFragment streetViewPanoramaFragment =
-//                (SupportStreetViewPanoramaFragment)
-//                        getSupportFragmentManager().findFragmentById(R.id.streetviewpanorama);
-//        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
-//                new OnStreetViewPanoramaReadyCallback() {
-//                    @Override
-//                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-//                        mStreetViewPanorama = panorama;
-//                        mStreetViewPanorama.setOnStreetViewPanoramaChangeListener(
-//                                MapActivity.this);
-//                        // Only need to set the position once as the streetview fragment will maintain
-//                        // its state.
-//                        if (savedInstanceState == null) {
-//                            mStreetViewPanorama.setPosition(SYDNEY);
-//                        }
-//                    }
-//                });
+        SupportStreetViewPanoramaFragment streetViewPanoramaFragment =
+                (SupportStreetViewPanoramaFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.streetviewpanorama);
+        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
+                new OnStreetViewPanoramaReadyCallback() {
+                    @Override
+                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+                        mStreetViewPanorama = panorama;
+                        // Only need to set the position once as the streetview fragment will maintain
+                        // its state.
+                        if (savedInstanceState == null) {
+                            mStreetViewPanorama.setPosition(unitLocationCoordinate);
+                        }
+                    }
+                });
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -217,5 +248,19 @@ public class RealEstateDetailActivity extends AppCompatActivity {
                         .draggable(true));
             }
         });
+    }
+
+    public void setMap(View view) {
+//        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+//
+//        if (!mapVisible) {
+//            getFragmentManager().beginTransaction().hide(streetView).commit();
+//
+//        }
+
+    }
+
+    public void setStreetView(View view) {
+        //getFragmentManager().beginTransaction().hide(mapView).commit();
     }
 }

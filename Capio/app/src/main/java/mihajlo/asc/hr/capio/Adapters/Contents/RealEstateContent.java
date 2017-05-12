@@ -49,6 +49,10 @@ public class RealEstateContent {
         ITEM_MAP.put(item.id, item);
     }
 
+    public static void clearAll() {
+        ITEMS.clear();
+        ITEM_MAP.clear();
+    }
 
     public static class RealEstateItem implements Parcelable{
         private final Long id;

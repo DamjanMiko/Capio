@@ -77,6 +77,7 @@ public class RealEstateFragment extends Fragment {
                 new AllUnitsTask(new AllUnitsTask.AsynResponse() {
                     @Override
                     public void processFinish(List<Unit> output) {
+                        RealEstateContent.clearAll();
                         RealEstateContent.addItems(output, price);
                         recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
                         firstTime = false;

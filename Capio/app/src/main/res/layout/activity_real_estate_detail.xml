@@ -12,233 +12,310 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/mvieww"
-                android:layout_width="368dp"
-                android:layout_height="250dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/mvieww"
+                    android:layout_width="368dp"
+                    android:layout_height="250dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/margin_tiny"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:background="@color/whiteText">
+
+                    <TextView
+                        android:id="@+id/textPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1750 kn/mj"
+                        android:textColor="@color/blackText"
+                        android:paddingStart="20dp"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_large" />
+
+                    <TextView
+                        android:id="@+id/textAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Brozova ulica 44"
+                        android:textColor="@color/grayText1"
+                        android:paddingStart="20dp"
+                        android:textSize="@dimen/text_large" />
+
+                    <TextView
+                        android:id="@+id/textAddressCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="10000 Zagreb, Hrvatska"
+                        android:textColor="@color/grayText2"
+                        android:paddingStart="20dp"
+                        android:textSize="@dimen/text_medium" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@drawable/unit_description">
+
+                    <TextView
+                        android:paddingLeft="@dimen/margin_medium"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:paddingTop="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Karakteristike"
+                        android:textColor="@color/blackText"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_medium" />
+
+                    <TextView
+                        android:id="@+id/textCijena"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_tiny"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cijena:"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/textKvadratura"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_tiny"
+                        android:layout_width="match_parent"
+                        android:layout_height="30sp"
+                        android:paddingTop="5sp"
+                        android:text="Kvadratura:"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/textBrojSoba"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_tiny"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Broj soba:"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/textRezije"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Prosječne režije:"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="300dp"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@drawable/unit_description"
+                    xmlns:map="http://schemas.android.com/apk/res-auto">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+
+                        <fragment
+                            android:id="@+id/map"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/margin_small"
+                            class="com.google.android.gms.maps.SupportMapFragment" />
+
+                    </FrameLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <Button
+                            android:id="@+id/btnMap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Map"
+                            android:layout_weight="0.5"
+                            android:onClick="setMap"/>
+
+                        <Button
+                            android:id="@+id/btnStreetView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Street view"
+                            android:layout_weight="0.5"
+                            android:onClick="setStreetView"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@drawable/unit_description"
+                    xmlns:map="http://schemas.android.com/apk/res-auto">
+
+                    <fragment
+                        android:id="@+id/streetviewpanorama"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        class="com.google.android.gms.maps.SupportStreetViewPanoramaFragment" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@drawable/unit_description">
+
+                    <TextView
+                        android:paddingLeft="@dimen/margin_medium"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:paddingTop="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Opis"
+                        android:textColor="@color/blackText"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_medium" />
+
+                    <TextView
+                        android:id="@+id/textOpis"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Opis"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@drawable/unit_description">
+
+                    <TextView
+                        android:paddingLeft="@dimen/margin_medium"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:paddingTop="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Podaci o korisniku"
+                        android:textColor="@color/blackText"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_medium" />
+
+                    <TextView
+                        android:id="@+id/textKorisnikIme"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ime:"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/textKorisnikEmail"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email:"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/textKorisnikTelefonskiBroj"
+                        android:paddingLeft="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Telefonski broj:"
+                        android:textColor="@color/blackText"
+                        android:textSize="@dimen/text_small" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:padding="@dimen/margin_small"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/margin_tiny"
-                android:paddingBottom="@dimen/margin_small"
-                android:background="@color/whiteText">
+                android:src="@drawable/ic_back_white"/>
 
-                <TextView
-                    android:id="@+id/textPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1750 kn/mj"
-                    android:textColor="@color/blackText"
-                    android:paddingStart="20dp"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_large" />
-
-                <TextView
-                    android:id="@+id/textAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Brozova ulica 44"
-                    android:textColor="@color/grayText1"
-                    android:paddingStart="20dp"
-                    android:textSize="@dimen/text_large" />
-
-                <TextView
-                    android:id="@+id/textAddressCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="10000 Zagreb, Hrvatska"
-                    android:textColor="@color/grayText2"
-                    android:paddingStart="20dp"
-                    android:textSize="@dimen/text_medium" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
+            <TextView
+                android:id="@+id/textPicNumb"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:background="@drawable/unit_description">
+                android:text="1/5"
+                android:textColor="@color/whiteText"
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_medium"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="200dp"/>
 
-                <TextView
-                    android:paddingLeft="@dimen/margin_medium"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:paddingTop="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Karakteristike"
-                    android:textColor="@color/blackText"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_medium" />
-
-                <TextView
-                    android:id="@+id/textCijena"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_tiny"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cijena:"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
-
-                <TextView
-                    android:id="@+id/textKvadratura"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_tiny"
-                    android:layout_width="match_parent"
-                    android:layout_height="30sp"
-                    android:paddingTop="5sp"
-                    android:text="Kvadratura:"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
-
-                <TextView
-                    android:id="@+id/textBrojSoba"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_tiny"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Broj soba:"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
-
-                <TextView
-                    android:id="@+id/textRezije"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Prosječne režije:"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
+        </RelativeLayout>
 
 
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="200dp"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:background="@drawable/unit_description"
-                xmlns:map="http://schemas.android.com/apk/res-auto">
-
-                <fragment
-                    android:id="@+id/map"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/margin_small"
-                    android:layout_weight="0.5"
-                    class="com.google.android.gms.maps.SupportMapFragment" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:background="@drawable/unit_description">
-
-                <TextView
-                    android:paddingLeft="@dimen/margin_medium"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:paddingTop="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Opis"
-                    android:textColor="@color/blackText"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_medium" />
-
-                <TextView
-                    android:id="@+id/textOpis"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Opis"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:background="@drawable/unit_description">
-
-                <TextView
-                    android:paddingLeft="@dimen/margin_medium"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:paddingTop="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Podaci o korisniku"
-                    android:textColor="@color/blackText"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_medium" />
-
-                <TextView
-                    android:id="@+id/textKorisnikIme"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ime:"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
-
-                <TextView
-                    android:id="@+id/textKorisnikEmail"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Email:"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
-
-                <TextView
-                    android:id="@+id/textKorisnikTelefonskiBroj"
-                    android:paddingLeft="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Telefonski broj:"
-                    android:textColor="@color/blackText"
-                    android:textSize="@dimen/text_small" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </ScrollView>
 
