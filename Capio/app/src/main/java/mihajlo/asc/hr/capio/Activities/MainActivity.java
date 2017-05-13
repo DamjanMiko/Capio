@@ -65,6 +65,9 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
     private String email;
     private String gender;
 
+    private boolean firstTime = true;
+    private int priceFilter = 10000;
+
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
      * above, but is designed to give continuous feedback to the user when scrolling.
@@ -92,6 +95,19 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         gender = inBundle.get("gender").toString();
 
         korisnik = new User(userId, name, surname, imageUrl, birthday, "|", "|", "Zagreb", email, gender);
+
+        if(inBundle.get("price") != null) {
+            priceFilter = Integer.parseInt(inBundle.get("price").toString());
+        }
+
+        if(inBundle.get("firstTime") != null) {
+            String firstTimeString = inBundle.get("firstTime").toString();
+            if(firstTimeString.equals("true")) {
+                firstTime = true;
+            } else {
+                firstTime = false;
+            }
+        }
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
@@ -165,7 +181,14 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             bundleUser.putString("Korisnik",korisnik.toString());
             ProfileFragment tmpProfileFragment = new ProfileFragment();
             tmpProfileFragment.setArguments(bundleUser);
-            fragments.add(new RealEstateFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+
+            Bundle bundleFilter = new Bundle();
+            bundleFilter.putBoolean("firstTime", firstTime);
+            bundleFilter.putInt("price", priceFilter);
+            RealEstateFragment tmpRealEstateFragment = new RealEstateFragment();
+            tmpRealEstateFragment.setArguments(bundleFilter);
+
+            fragments.add(tmpRealEstateFragment); // TODO umjesto ovoga treba dodati new RealEstateFragment()
             fragments.add(new MapFragment());
             fragments.add(tmpProfileFragment); //
         }

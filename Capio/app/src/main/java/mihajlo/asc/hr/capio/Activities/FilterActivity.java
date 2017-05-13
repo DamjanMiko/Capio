@@ -76,7 +76,7 @@ public class FilterActivity extends AppCompatActivity {
         filterIntent.putExtra("birthday", birthday);
         filterIntent.putExtra("gender", gender);
         filterIntent.putExtra("price", price);
-        filterIntent.putExtra("firstTime", false);
+        filterIntent.putExtra("firstTime", true);
         startActivity(filterIntent);
     }
 }

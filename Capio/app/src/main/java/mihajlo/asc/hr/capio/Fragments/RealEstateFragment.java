@@ -35,8 +35,8 @@ public class RealEstateFragment extends Fragment {
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private boolean firstTime = true;
-    private int price = 10000;
+    private boolean firstTime;
+    private int priceFilter;
 
     private OnListFragmentInteractionListener mListener;
 
@@ -58,11 +58,10 @@ public class RealEstateFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_realestate_list, container, false);
 
-        Bundle arguments = getArguments();
-        if(arguments != null) {
-            price = arguments.getInt("price");
-            firstTime = arguments.getBoolean("firstTime");
-        }
+        firstTime = getArguments().getBoolean("firstTime");
+        priceFilter = getArguments().getInt("price");
+
+        android.util.Log.e("CIJENA", String.valueOf(priceFilter));
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -78,7 +77,7 @@ public class RealEstateFragment extends Fragment {
                     @Override
                     public void processFinish(List<Unit> output) {
                         RealEstateContent.clearAll();
-                        RealEstateContent.addItems(output, price);
+                        RealEstateContent.addItems(output, priceFilter);
                         recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
                         firstTime = false;
                     }
@@ -86,7 +85,6 @@ public class RealEstateFragment extends Fragment {
             } else {
                 recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
             }
-
         }
 
         return view;
