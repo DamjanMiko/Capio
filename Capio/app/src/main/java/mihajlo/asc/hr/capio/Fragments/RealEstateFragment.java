@@ -20,6 +20,7 @@ import mihajlo.asc.hr.capio.Activities.MainActivity;
 import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent;
 import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent.RealEstateItem;
 import mihajlo.asc.hr.capio.Adapters.MyRealEstateRecyclerViewAdapter;
+import mihajlo.asc.hr.capio.HttpRequests.AllLikeUnitsByUserIdTask;
 import mihajlo.asc.hr.capio.HttpRequests.AllUnitsTask;
 import mihajlo.asc.hr.capio.Models.Unit;
 import mihajlo.asc.hr.capio.R;
@@ -73,6 +74,11 @@ public class RealEstateFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             if (firstTime) {
+
+//                new AllLikeUnitsByUserIdTask(new AllLikeUnitsByUserIdTask.AsynResponse() {
+//
+//                }).execute();
+
                 new AllUnitsTask(new AllUnitsTask.AsynResponse() {
                     @Override
                     public void processFinish(List<Unit> output) {
@@ -85,6 +91,7 @@ public class RealEstateFragment extends Fragment {
             } else {
                 recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
             }
+
         }
 
         return view;

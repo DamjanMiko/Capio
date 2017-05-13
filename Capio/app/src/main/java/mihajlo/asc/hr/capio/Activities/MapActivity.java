@@ -45,16 +45,9 @@ public class MapActivity extends AppCompatActivity implements OnMarkerDragListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-//        btnBack = (ImageView) findViewById(R.id.btnBack);
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onBackPressed();
-//            }
-//        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         unitLocationCoordinate = (LatLng) getIntent().getExtras().get("unitLocationCoordinate");
 
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         SupportStreetViewPanoramaFragment streetViewPanoramaFragment =
                 (SupportStreetViewPanoramaFragment)
@@ -127,17 +120,9 @@ public class MapActivity extends AppCompatActivity implements OnMarkerDragListen
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_map, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; go home
                 onBackPressed();
                 return true;
             default:
