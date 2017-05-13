@@ -13,17 +13,21 @@ public class Unit {
     private float price;
     private float area;
     private boolean rent;
+    private int avgOverheads;
+    private int rooms;
     private Location location;
     private List<Image> images;
 
     public Unit() {}
 
-    public Unit(Long id, String description, float price, float area, boolean rent, Location location, List<Image> images) {
+    public Unit(Long id, String description, float price, float area, boolean rent, int avgOverheads, int rooms, Location location, List<Image> images) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.area = area;
         this.rent = rent;
+        this.avgOverheads = avgOverheads;
+        this.rooms = rooms;
         this.location = location;
         this.images = images;
     }
@@ -82,5 +86,21 @@ public class Unit {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public int getAvgOverheads() {
+        return avgOverheads;
+    }
+
+    public void setAvgOverheads(int avgOverheads) {
+        this.avgOverheads = avgOverheads;
+    }
+
+    public int getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
     }
 }

@@ -141,68 +141,25 @@
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginBottom="@dimen/margin_small"
-                    android:background="@drawable/unit_description"
-                    xmlns:map="http://schemas.android.com/apk/res-auto">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp">
-
-                        <fragment
-                            android:id="@+id/map"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="@dimen/margin_small"
-                            class="com.google.android.gms.maps.SupportMapFragment" />
-
-                    </FrameLayout>
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <Button
-                            android:id="@+id/btnMap"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Map"
-                            android:layout_weight="0.5"
-                            android:onClick="setMap"/>
-
-                        <Button
-                            android:id="@+id/btnStreetView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Street view"
-                            android:layout_weight="0.5"
-                            android:onClick="setStreetView"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginBottom="@dimen/margin_small"
-                    android:background="@drawable/unit_description"
-                    xmlns:map="http://schemas.android.com/apk/res-auto">
+                    android:background="@drawable/unit_description">
 
                     <fragment
-                        android:id="@+id/streetviewpanorama"
+                        android:id="@+id/map"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        class="com.google.android.gms.maps.SupportStreetViewPanoramaFragment" />
+                        android:layout_height="230dp"
+                        android:layout_margin="@dimen/margin_small"
+                        class="com.google.android.gms.maps.SupportMapFragment" />
+
+
+                    <Button
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Street view"
+                        android:onClick="setStreetView"/>
+
 
                 </LinearLayout>
 

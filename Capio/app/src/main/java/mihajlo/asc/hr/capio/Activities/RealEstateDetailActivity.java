@@ -139,13 +139,6 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         btnContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                scrollView.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-//                    }
-//                });
-
                 if (ownerOfUnit != null) {
                     dialContactPhone(ownerOfUnit.getContactInfo().getPhoneNumber());
                 }
@@ -212,22 +205,6 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         streetView = getFragmentManager().findFragmentById(R.id.streetviewpanorama);
         mapView = getFragmentManager().findFragmentById(R.id.streetviewpanorama);
 
-        SupportStreetViewPanoramaFragment streetViewPanoramaFragment =
-                (SupportStreetViewPanoramaFragment)
-                        getSupportFragmentManager().findFragmentById(R.id.streetviewpanorama);
-        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
-                new OnStreetViewPanoramaReadyCallback() {
-                    @Override
-                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-                        mStreetViewPanorama = panorama;
-                        // Only need to set the position once as the streetview fragment will maintain
-                        // its state.
-                        if (savedInstanceState == null) {
-                            mStreetViewPanorama.setPosition(unitLocationCoordinate);
-                        }
-                    }
-                });
-
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -241,26 +218,37 @@ public class RealEstateDetailActivity extends AppCompatActivity {
 
                 map.moveCamera(center);
                 map.animateCamera(zoom);
-
+                map.getUiSettings().setScrollGesturesEnabled(false);
+                map.getUiSettings().setZoomGesturesEnabled(false);
                 mMarker = map.addMarker(new MarkerOptions()
                         .position(unitLocationCoordinate)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
                         .draggable(true));
+                map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                    @Override
+                    public void onMapLongClick(LatLng latLng) {
+                        Intent intent = new Intent(RealEstateDetailActivity.this, MapActivity.class);
+                        intent.putExtra("unitLocationCoordinate", unitLocationCoordinate);
+                        startActivity(intent);
+                    }
+                });
+                map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        Intent intent = new Intent(RealEstateDetailActivity.this, MapActivity.class);
+                        intent.putExtra("unitLocationCoordinate", unitLocationCoordinate);
+                        startActivity(intent);
+                    }
+                });
             }
         });
-    }
 
-    public void setMap(View view) {
-//        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-//
-//        if (!mapVisible) {
-//            getFragmentManager().beginTransaction().hide(streetView).commit();
-//
-//        }
 
     }
 
     public void setStreetView(View view) {
-        //getFragmentManager().beginTransaction().hide(mapView).commit();
+        Intent intent = new Intent(RealEstateDetailActivity.this, MapActivity.class);
+        intent.putExtra("unitLocationCoordinate", unitLocationCoordinate);
+        startActivity(intent);
     }
 }

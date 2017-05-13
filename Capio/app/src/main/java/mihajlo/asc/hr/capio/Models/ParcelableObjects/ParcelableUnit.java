@@ -21,6 +21,8 @@ public class ParcelableUnit implements Parcelable {
     private float price;
     private float area;
     private boolean rent;
+    private int avgOverheads;
+    private int rooms;
     private ParcelableLocation location;
     private List<ParcelableImage> images;
 
@@ -41,6 +43,8 @@ public class ParcelableUnit implements Parcelable {
         price = in.readFloat();
         area = in.readFloat();
         rent = in.readByte() != 0;
+        avgOverheads = in.readInt();
+        rooms = in.readInt();
         location = in.readParcelable(ParcelableLocation.class.getClassLoader());
         images = new ArrayList<>();
         for (Object o : in.readParcelableArray(ParcelableImage.class.getClassLoader())) {
@@ -50,12 +54,15 @@ public class ParcelableUnit implements Parcelable {
 //                in.readParcelableArray(ParcelableImage.class.getClassLoader()));
     }
 
-    public ParcelableUnit(Long id, String description, float price, float area, boolean rent, ParcelableLocation location, List<ParcelableImage> images) {
+    public ParcelableUnit(Long id, String description, float price, float area, boolean rent,
+                          int avgOverheads, int rooms, ParcelableLocation location, List<ParcelableImage> images) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.area = area;
         this.rent = rent;
+        this.avgOverheads = avgOverheads;
+        this.rooms = rooms;
         this.location = location;
         this.images = images;
     }
@@ -66,6 +73,8 @@ public class ParcelableUnit implements Parcelable {
         this.price = unit.getPrice();
         this.area = unit.getArea();
         this.rent = unit.isRent();
+        this.avgOverheads = unit.getAvgOverheads();
+        this.rooms = unit.getRooms();
         this.location = new ParcelableLocation(unit.getLocation());
         images = new ArrayList<>();
         for (Image img : unit.getImages()) {
@@ -86,6 +95,8 @@ public class ParcelableUnit implements Parcelable {
         out.writeFloat(price);
         out.writeFloat(area);
         out.writeByte((byte) (rent ? 1 : 0));
+        out.writeInt(avgOverheads);
+        out.writeInt(rooms);
         out.writeParcelable(location, flags);
         ParcelableImage[] arr = new ParcelableImage[images.size()];
         out.writeParcelableArray(images.toArray(arr), flags);
@@ -145,5 +156,21 @@ public class ParcelableUnit implements Parcelable {
 
     public void setImages(List<ParcelableImage> images) {
         this.images = images;
+    }
+
+    public int getAvgOverheads() {
+        return avgOverheads;
+    }
+
+    public void setAvgOverheads(int avgOverheads) {
+        this.avgOverheads = avgOverheads;
+    }
+
+    public int getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
     }
 }

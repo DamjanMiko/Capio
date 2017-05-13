@@ -33,7 +33,7 @@ public class ProbniActivity extends AppCompatActivity {
         Location location = new Location(null, "Unska ulica", 3, 10000, "Hrvatska", "Zagreb");
         ArrayList<Image> images = new ArrayList<>();
         images.add(image);
-        Unit unit = new Unit(null, "Ovo je opis stana.", 5000, 60, false, location, images);
+        Unit unit = new Unit(null, "Ovo je opis stana.", 5000, 60, false, 1000, 2, location, images);
 
         new CreateUnitTask(new CreateUnitTask.AsynResponse() {
             @Override

@@ -41,7 +41,6 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
 
-
         new ImageLoadWithListenerTask(mValues.get(position).backgroundUrl,
                 new ImageLoadWithListenerTask.AsynResponse() {
             @Override
@@ -56,8 +55,6 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
                 }
             }
         }).execute();
-
-
 
         holder.mPriceView.setText(mValues.get(position).price + " kn/mj");
         holder.mLocationView.setText(mValues.get(position).location);

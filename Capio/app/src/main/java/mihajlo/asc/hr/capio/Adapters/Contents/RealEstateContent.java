@@ -38,7 +38,7 @@ public class RealEstateContent {
                 String backgroundUrl = unit.getImages().get(0).getUrl();
 
                 RealEstateItem newItem = new RealEstateItem(unit.getId(),
-                        String.valueOf(unit.getPrice()), location, backgroundUrl, new ParcelableUnit(unit));
+                        String.valueOf((int) unit.getPrice()), location, backgroundUrl, new ParcelableUnit(unit));
                 addItem(newItem);
             }
         }
