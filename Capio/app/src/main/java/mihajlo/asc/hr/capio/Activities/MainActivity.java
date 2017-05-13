@@ -68,6 +68,7 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
     private boolean firstTime = true;
     private int priceFilter = 7500;
     private int areaFilter = 300;
+    private int overheadsFilter = 3000;
     private int roomsFilter = 10;
 
     /**
@@ -115,19 +116,17 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             areaFilter = Integer.parseInt(inBundle.get("area").toString());
         }
 
+        if(inBundle.get("overheads") != null) {
+            overheadsFilter = Integer.parseInt(inBundle.get("overheads").toString());
+        }
+
         if(inBundle.get("rooms") != null) {
             roomsFilter = Integer.parseInt(inBundle.get("rooms").toString());
         }
 
-        // BEGIN_INCLUDE (setup_viewpager)
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.setAdapter(new SamplePagerAdapter(getSupportFragmentManager()));
-        // END_INCLUDE (setup_viewpager)
 
-        // BEGIN_INCLUDE (setup_slidingtablayout)
-        // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
-        // it's PagerAdapter set.
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);
         mSlidingTabLayout.setDistributeEvenly(true);
@@ -186,28 +185,26 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         public SamplePagerAdapter(FragmentManager fm) {
             super(fm);
             Bundle bundleUser = new Bundle();
-            //korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
-
             bundleUser.putString("Korisnik",korisnik.toString());
-            ProfileFragment tmpProfileFragment = new ProfileFragment();
-            tmpProfileFragment.setArguments(bundleUser);
+
+            ProfileFragment profileFragment = new ProfileFragment();
+            profileFragment.setArguments(bundleUser);
 
             Bundle bundleFilter = new Bundle();
             bundleFilter.putBoolean("firstTime", firstTime);
             bundleFilter.putInt("price", priceFilter);
             bundleFilter.putInt("area", areaFilter);
+            bundleFilter.putInt("overheads", overheadsFilter);
             bundleFilter.putInt("rooms", roomsFilter);
-            RealEstateFragment tmpRealEstateFragment = new RealEstateFragment();
-            tmpRealEstateFragment.setArguments(bundleFilter);
 
-            fragments.add(tmpRealEstateFragment); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+            RealEstateFragment realEstateFragment = new RealEstateFragment();
+            realEstateFragment.setArguments(bundleFilter);
+
+            fragments.add(realEstateFragment);
             fragments.add(new MapFragment());
-            fragments.add(tmpProfileFragment); //
+            fragments.add(profileFragment);
         }
 
-        /**
-         * @return the number of pages to display
-         */
         @Override
         public int getCount() {
             return 3;
@@ -230,7 +227,6 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             return sb;
         }
-        // END_INCLUDE (pageradapter_getpagetitle)
 
         @Override
         public Fragment getItem(int position) {

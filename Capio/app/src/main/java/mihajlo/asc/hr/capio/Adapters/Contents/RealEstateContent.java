@@ -13,25 +13,15 @@ import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableLocation;
 import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableUnit;
 import mihajlo.asc.hr.capio.Models.Unit;
 
-/**
- * Created by Damjan on 3/30/2017.
- */
-
 public class RealEstateContent {
 
-    /**
-     * An array of sample (dummy) items.
-     */
     public static final List<RealEstateItem> ITEMS = new ArrayList<>();
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
     public static final Map<Long, RealEstateItem> ITEM_MAP = new HashMap<>();
 
-    public static  void addItems(List<Unit> list, int price, int area, List<Long> idsLike) {
+    public static  void addItems(List<Unit> list, int price, int area, int overheads, int rooms, List<Long> idsLike) {
         for (Unit unit : list) {
-            if((unit.getPrice() < price) && (unit.getArea() < area)) {
+            if((unit.getPrice() <= price) && (unit.getArea() <= area) && (unit.getAvgOverheads() <= overheads) && (unit.getRooms() <= rooms)) {
                 Location currentLocation = unit.getLocation();
                 String location = currentLocation.getStreetName() + " " +
                         currentLocation.getHouseNumber() + ", " + currentLocation.getCity();

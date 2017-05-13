@@ -34,6 +34,12 @@ public class FilterActivity extends AppCompatActivity {
     private int area = 150;
     private int areaStep = 10;
 
+    // overheads filter
+    private SeekBar overheadsSeekBar;
+    private TextView overheadsTextView;
+    private int overheads = 1500;
+    private int overheadsStep = 50;
+
     // rooms filter
     private Button lessRoomsButton;
     private TextView roomsValue;
@@ -85,6 +91,24 @@ public class FilterActivity extends AppCompatActivity {
             }
         });
 
+        overheadsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progress = (progress / overheadsStep) * overheadsStep;
+                overheads = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                overheadsTextView.setText(String.valueOf(overheads) + " kn");
+            }
+        });
+
         lessRoomsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,11 +152,15 @@ public class FilterActivity extends AppCompatActivity {
     private void initializeComponents() {
         priceSeekBar = (SeekBar) findViewById(R.id.priceFilter);
         priceTextView = (TextView) findViewById(R.id.priceValue);
-        priceTextView.setText(String.valueOf(price));
+        priceTextView.setText(String.valueOf(price) + " kn");
 
         areaSeekBar = (SeekBar) findViewById(R.id.areaFilter);
         areaTextView = (TextView) findViewById(R.id.areaValue);
-        areaTextView.setText(String.valueOf(area));
+        areaTextView.setText(String.valueOf(area) + " m2");
+
+        overheadsSeekBar = (SeekBar) findViewById(R.id.overheadsFilter);
+        overheadsTextView = (TextView) findViewById(R.id.overheadsValue);
+        overheadsTextView.setText(String.valueOf(overheads) + " kn");
 
         lessRoomsButton = (Button) findViewById(R.id.lessRoomsButton);
         roomsValue = (TextView) findViewById(R.id.roomsValue);
@@ -151,6 +179,7 @@ public class FilterActivity extends AppCompatActivity {
         filterIntent.putExtra("gender", gender);
         filterIntent.putExtra("price", price);
         filterIntent.putExtra("area", area);
+        filterIntent.putExtra("overheads", overheads);
         filterIntent.putExtra("rooms", rooms);
         filterIntent.putExtra("firstTime", true);
         startActivity(filterIntent);

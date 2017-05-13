@@ -29,5 +29,6 @@
     <string name="plus_button">+</string>
     <string name="rooms_filter">Number of rooms</string>
     <string name="logout_button">Logout</string>
+    <string name="filter_overheads">Overheads</string>
 
 </resources>
