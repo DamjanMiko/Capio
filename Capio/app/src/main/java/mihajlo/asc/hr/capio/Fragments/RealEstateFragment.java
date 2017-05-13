@@ -38,6 +38,8 @@ public class RealEstateFragment extends Fragment {
     private int mColumnCount = 1;
     private boolean firstTime;
     private int priceFilter;
+    private int areaFilter;
+    private int roomsFilter;
 
     private OnListFragmentInteractionListener mListener;
 
@@ -61,8 +63,9 @@ public class RealEstateFragment extends Fragment {
 
         firstTime = getArguments().getBoolean("firstTime");
         priceFilter = getArguments().getInt("price");
+        areaFilter = getArguments().getInt("area");
+        roomsFilter = getArguments().getInt("rooms");
 
-        android.util.Log.e("CIJENA", String.valueOf(priceFilter));
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -79,11 +82,13 @@ public class RealEstateFragment extends Fragment {
 //
 //                }).execute();
 
+                // TODO: ubaciti u funkciju roomsFitler atribut i izmijeniti ju
+
                 new AllUnitsTask(new AllUnitsTask.AsynResponse() {
                     @Override
                     public void processFinish(List<Unit> output) {
                         RealEstateContent.clearAll();
-                        RealEstateContent.addItems(output, priceFilter);
+                        RealEstateContent.addItems(output, priceFilter, areaFilter, null);
                         recyclerView.setAdapter(new MyRealEstateRecyclerViewAdapter(RealEstateContent.ITEMS, mListener));
                         firstTime = false;
                     }

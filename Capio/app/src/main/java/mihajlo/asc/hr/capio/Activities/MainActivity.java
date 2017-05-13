@@ -66,7 +66,9 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
     private String gender;
 
     private boolean firstTime = true;
-    private int priceFilter = 10000;
+    private int priceFilter = 7500;
+    private int areaFilter = 300;
+    private int roomsFilter = 10;
 
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
@@ -107,6 +109,14 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             } else {
                 firstTime = false;
             }
+        }
+
+        if(inBundle.get("area") != null) {
+            areaFilter = Integer.parseInt(inBundle.get("area").toString());
+        }
+
+        if(inBundle.get("rooms") != null) {
+            roomsFilter = Integer.parseInt(inBundle.get("rooms").toString());
         }
 
         // BEGIN_INCLUDE (setup_viewpager)
@@ -185,6 +195,8 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             Bundle bundleFilter = new Bundle();
             bundleFilter.putBoolean("firstTime", firstTime);
             bundleFilter.putInt("price", priceFilter);
+            bundleFilter.putInt("area", areaFilter);
+            bundleFilter.putInt("rooms", roomsFilter);
             RealEstateFragment tmpRealEstateFragment = new RealEstateFragment();
             tmpRealEstateFragment.setArguments(bundleFilter);
 

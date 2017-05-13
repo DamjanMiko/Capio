@@ -29,9 +29,9 @@ public class RealEstateContent {
      */
     public static final Map<Long, RealEstateItem> ITEM_MAP = new HashMap<>();
 
-    public static  void addItems(List<Unit> list, int price, List<Long> idsLike) {
+    public static  void addItems(List<Unit> list, int price, int area, List<Long> idsLike) {
         for (Unit unit : list) {
-            if(unit.getPrice() < price) {
+            if((unit.getPrice() < price) && (unit.getArea() < area)) {
                 Location currentLocation = unit.getLocation();
                 String location = currentLocation.getStreetName() + " " +
                         currentLocation.getHouseNumber() + ", " + currentLocation.getCity();
