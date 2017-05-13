@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,7 +39,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
 
         new ImageLoadWithListenerTask(mValues.get(position).backgroundUrl,
@@ -53,8 +54,15 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
                 } else {
                     holder.mLayout.setBackground(ob);
                 }
+                if (mValues.get(position).isLike()) {
+                    holder.mImageLike.setImageResource(R.mipmap.ic_red_heart);
+                } else {
+                    holder.mImageLike.setImageResource(R.mipmap.ic_white_heart);
+                }
+
             }
         }).execute();
+
 
         holder.mPriceView.setText(mValues.get(position).price + " kn/mj");
         holder.mLocationView.setText(mValues.get(position).location);
@@ -66,6 +74,19 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
+                }
+            }
+        });
+
+        holder.mImageLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mValues.get(position).isLike()) {
+                    mValues.get(position).setLike(false);
+                    holder.mImageLike.setImageResource(R.mipmap.ic_white_heart);
+                } else {
+                    mValues.get(position).setLike(true);
+                    holder.mImageLike.setImageResource(R.mipmap.ic_red_heart);
                 }
             }
         });
@@ -81,6 +102,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
         public final RelativeLayout mLayout;
         public final TextView mPriceView;
         public final TextView mLocationView;
+        public final ImageView mImageLike;
         public RealEstateItem mItem;
 
         public ViewHolder(View view) {
@@ -89,6 +111,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
             mLayout = (RelativeLayout) view.findViewById(R.id.layout);
             mPriceView = (TextView) view.findViewById(R.id.textPrice);
             mLocationView = (TextView) view.findViewById(R.id.textLocation);
+            mImageLike = (ImageView) view.findViewById(R.id.imageLike);
         }
 
         @Override
