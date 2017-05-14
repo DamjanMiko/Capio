@@ -2,6 +2,7 @@ package mihajlo.asc.hr.capio.Fragments;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +40,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import mihajlo.asc.hr.capio.Activities.MainActivity;
+import mihajlo.asc.hr.capio.Activities.MapActivity;
+import mihajlo.asc.hr.capio.Activities.RealEstateDetailActivity;
+import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent;
 import mihajlo.asc.hr.capio.HttpRequests.AllUnitsTask;
 import mihajlo.asc.hr.capio.Models.Unit;
 import mihajlo.asc.hr.capio.R;
@@ -70,6 +76,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnMarkerClickList
     private Marker mMelbourne;
 
     private TextView apartmentDesc;
+    private Button goButton;
 
     private HashMap<Marker,Unit> mapOfMarkerUnit = new HashMap<>();
 
@@ -98,7 +105,14 @@ public class MapFragment extends Fragment implements GoogleMap.OnMarkerClickList
 
         apartmentPicture = (ImageView) rootView.findViewById(R.id.appPic);
         apartmentDesc = (TextView) rootView.findViewById(R.id.appDesc);
-
+        goButton = (Button) rootView.findViewById(R.id.redirect);
+        goButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Unit tmpUnit = mapOfMarkerUnit.get(lastMarker);
+                RealEstateContent.RealEstateItem ri = new RealEstateContent.RealEstateItem(tmpUnit.getId(), tmpUnit.getPrice(), tmpUnit.getLocation().getStreetName() +" "+tmpUnit.getLocation().getHouseNumber()+" "+tmpUnit.getLocation().getCountry(),
+                        tmpUnit.getImages().get(0).getUrl(), false, null)
+            }
+        });
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -164,6 +178,58 @@ public class MapFragment extends Fragment implements GoogleMap.OnMarkerClickList
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.fakultet))
         );
 
+        Marker mFFZG = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(45.797435, 15.971488))
+                .title("FFZG")
+                .snippet("Filozofski fakultet u Zagrebu")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.fakultet))
+        );
+
+        Marker mFSB = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(45.795363, 15.971231))
+                .title("FFZG")
+                .snippet("Fakultet Strojarstva i Brodogradnje")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.fakultet))
+        );
+
+        Marker mmenza = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(45.800129, 15.971536))
+                .title("Menza")
+                .snippet("Menza Cassandra")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.menza))
+        );
+
+        Marker mmenza2 = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(45.803956, 15.965496))
+                .title("Menza")
+                .snippet("Menza SC")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.menza))
+        );
+
+        Marker mtram = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(45.802707, 15.964552))
+                .title("Tram")
+                .snippet("Tramvajska stanica - Studentski centar")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.tram))
+        );
+
+        Marker mtram0 = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(45.799581, 15.970978))
+                .title("Tram")
+                .snippet("Tramvajska stanica - Sveučilišna aleja")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.tram))
+        );
+
+        Marker mtram1 = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(45.799663, 15.967620))
+                .title("Tram")
+                .snippet("Tramvajska stanica - Vrbik")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.tram))
+        );
+
+
+
+
         for(Unit tmpUnit : listOfAllUnits){
             Geocoder geocoder = new Geocoder(this.getContext(), Locale.getDefault());
             mihajlo.asc.hr.capio.Models.Location tmpLocation = tmpUnit.getLocation();
@@ -194,56 +260,20 @@ public class MapFragment extends Fragment implements GoogleMap.OnMarkerClickList
         }
 
 
-        /*mBrisbane = googleMap.addMarker(new MarkerOptions()
-                .position(PERTH)
-                .title("900€")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
-                .infoWindowAnchor(0.5f, 0.5f));
-        mBrisbane.showInfoWindow();
-        mapOfMarkerUnit.put(mBrisbane,new String[]{"Great place for students","900€","http://cdn.homedit.com/wp-content/uploads/2015/09/Student-apartment-in-Hong-Kong-window-desks.jpg"});
 
-
-        mSydney = googleMap.addMarker(new MarkerOptions()
-                .position(SYDNEY)
-                .title("1200€")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
-                .infoWindowAnchor(0.5f, 0.5f));
-        mSydney.showInfoWindow();
-
-        //Unit tmpUnit1 = new Unit(12304123,"Super cool apartment",1200,10000,1200,200,4,)
-        mapOfMarkerUnit.put(mSydney,new String[]{"Super cool apartment","1200€","https://newyorkapartmentsdotorg.files.wordpress.com/2011/06/new-york-apartment1.jpg"});
-
-        // Creates a draggable marker. Long press to drag.
-        mMelbourne = googleMap.addMarker(new MarkerOptions()
-                .position(ALICE_SPRINGS)
-                .title("1500€")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
-                .infoWindowAnchor(0.5f, 0.5f));
-        mMelbourne.showInfoWindow();
-
-        mapOfMarkerUnit.put(mMelbourne,new String[]{"Great apartment","1500€","https://res.cloudinary.com/apartmentlist/image/upload/t_fullsize/r0ymlbhl0u9chmnzcula.jpg"});
-        /*mAdelaide = googleMap.addMarker(new MarkerOptions()
-                .position(ADELAIDE)
-                .title("Adelaide")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.apartmanmapicon))
-                .snippet("Population: 1,213,000"));
-
-
-*/
-
-        /*mAdelaide = googleMap.addMarker(new MarkerOptions()
-                .position(ADELAIDE)
-                .title("My Spot")
-                .snippet("This is my spot!")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                */
     }
 
 
         private Marker lastMarker;
         private ImageView apartmentPicture;
 
-
+        @Override
+        public void onListFragmentInteraction(RealEstateContent.RealEstateItem item) {
+        Intent intent = new Intent(MapActivity.this, RealEstateDetailActivity.class);
+        intent.putExtra("item", item);
+        intent.putExtra("notLike", false);
+        startActivity(intent);
+    }
 
         @Override
         public boolean onMarkerClick(final Marker marker) {
