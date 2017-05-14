@@ -13,32 +13,26 @@ import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableLocation;
 import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableUnit;
 import mihajlo.asc.hr.capio.Models.Unit;
 
-/**
- * Created by Damjan on 3/30/2017.
- */
-
 public class RealEstateContent {
 
-    /**
-     * An array of sample (dummy) items.
-     */
     public static final List<RealEstateItem> ITEMS = new ArrayList<>();
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
     public static final Map<Long, RealEstateItem> ITEM_MAP = new HashMap<>();
 
-    public static  void addItems(List<Unit> list, int price) {
+    public static  void addItems(List<Unit> list, int price, int area, int overheads, int rooms, List<Long> idsLike) {
         for (Unit unit : list) {
-            if(unit.getPrice() < price) {
+            if((unit.getPrice() <= price) && (unit.getArea() <= area) && (unit.getAvgOverheads() <= overheads) && (unit.getRooms() <= rooms)) {
                 Location currentLocation = unit.getLocation();
                 String location = currentLocation.getStreetName() + " " +
                         currentLocation.getHouseNumber() + ", " + currentLocation.getCity();
                 String backgroundUrl = unit.getImages().get(0).getUrl();
 
+                boolean like = false;
+                if (idsLike != null && idsLike.size() != 0 && idsLike.contains(unit.getId())) {
+                    like = true;
+                }
                 RealEstateItem newItem = new RealEstateItem(unit.getId(),
-                        String.valueOf((int) unit.getPrice()), location, backgroundUrl, new ParcelableUnit(unit));
+                        String.valueOf((int) unit.getPrice()), location, backgroundUrl, like , new ParcelableUnit(unit));
                 addItem(newItem);
             }
         }
@@ -59,6 +53,7 @@ public class RealEstateContent {
         public final String price;
         public final String location;
         public final String backgroundUrl;
+        public boolean like;
         public ParcelableUnit unit;
 
         // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -78,19 +73,19 @@ public class RealEstateContent {
             price = in.readString();
             location = in.readString();
             backgroundUrl = in.readString();
+            like = in.readByte() != 0;
             unit = in.readParcelable(ParcelableUnit.class.getClassLoader());
         }
 
         public RealEstateItem(Long id, String price, String location,
-                              String backgroundUrl, ParcelableUnit unit) {
+                              String backgroundUrl, boolean like, ParcelableUnit unit) {
             this.id = id;
             this.price = price;
             this.location = location;
             this.backgroundUrl = backgroundUrl;
+            this.like = like;
             this.unit = unit;
         }
-
-
 
         /* everything below here is for implementing Parcelable */
 
@@ -107,11 +102,21 @@ public class RealEstateContent {
             out.writeString(price);
             out.writeString(location);
             out.writeString(backgroundUrl);
+            out.writeByte((byte) (like ? 1 : 0));
             out.writeParcelable(unit, flags);
         }
 
         public ParcelableUnit getUnit() {
             return unit;
         }
+
+        public boolean isLike() {
+            return like;
+        }
+
+        public void setLike(boolean like) {
+            this.like = like;
+        }
+
     }
 }

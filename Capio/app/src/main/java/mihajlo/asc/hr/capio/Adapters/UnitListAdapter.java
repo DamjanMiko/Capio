@@ -1,5 +1,9 @@
 package mihajlo.asc.hr.capio.Adapters;
 
+/**
+ * Created by Damjan on 5/14/2017.
+ */
+
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -10,23 +14,24 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent.RealEstateItem;
-import mihajlo.asc.hr.capio.Fragments.RealEstateFragment.OnListFragmentInteractionListener;
+import java.util.List;
+
+import mihajlo.asc.hr.capio.Adapters.Contents.RealEstateContent;
+import mihajlo.asc.hr.capio.Fragments.RealEstateFragment;
 import mihajlo.asc.hr.capio.R;
 import mihajlo.asc.hr.capio.Util.ImageLoadWithListenerTask;
 
-import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link RealEstateItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * {@link RecyclerView.Adapter} that can display a {@link RealEstateContent.RealEstateItem} and makes a call to the
+ * specified {@link RealEstateFragment.OnListFragmentInteractionListener}.
  */
-public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyRealEstateRecyclerViewAdapter.ViewHolder> {
+public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHolder> {
 
-    private final List<RealEstateItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<RealEstateContent.RealEstateItem> mValues;
+    private final RealEstateFragment.OnListFragmentInteractionListener mListener;
 
-    public MyRealEstateRecyclerViewAdapter(List<RealEstateItem> items, OnListFragmentInteractionListener listener) {
+    public UnitListAdapter(List<RealEstateContent.RealEstateItem> items, RealEstateFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -42,26 +47,22 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
 
+
         new ImageLoadWithListenerTask(mValues.get(position).backgroundUrl,
                 new ImageLoadWithListenerTask.AsynResponse() {
-            @Override
-            public void processFinish(Bitmap picture) {
-                BitmapDrawable ob = new BitmapDrawable(picture);
+                    @Override
+                    public void processFinish(Bitmap picture) {
+                        BitmapDrawable ob = new BitmapDrawable(picture);
 
-                final int sdk = android.os.Build.VERSION.SDK_INT;
-                if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    holder.mLayout.setBackgroundDrawable(ob);
-                } else {
-                    holder.mLayout.setBackground(ob);
-                }
-                if (mValues.get(position).isLike()) {
-                    holder.mImageLike.setImageResource(R.mipmap.ic_red_heart);
-                } else {
-                    holder.mImageLike.setImageResource(R.mipmap.ic_white_heart);
-                }
-
-            }
-        }).execute();
+                        final int sdk = android.os.Build.VERSION.SDK_INT;
+                        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            holder.mLayout.setBackgroundDrawable(ob);
+                        } else {
+                            holder.mLayout.setBackground(ob);
+                        }
+                        holder.mImageLike.setVisibility(View.GONE);
+                    }
+                }).execute();
 
 
         holder.mPriceView.setText(mValues.get(position).price + " kn/mj");
@@ -74,19 +75,6 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
-
-        holder.mImageLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mValues.get(position).isLike()) {
-                    mValues.get(position).setLike(false);
-                    holder.mImageLike.setImageResource(R.mipmap.ic_white_heart);
-                } else {
-                    mValues.get(position).setLike(true);
-                    holder.mImageLike.setImageResource(R.mipmap.ic_red_heart);
                 }
             }
         });
@@ -103,7 +91,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
         public final TextView mPriceView;
         public final TextView mLocationView;
         public final ImageView mImageLike;
-        public RealEstateItem mItem;
+        public RealEstateContent.RealEstateItem mItem;
 
         public ViewHolder(View view) {
             super(view);
@@ -120,3 +108,4 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter<MyReal
         }
     }
 }
+

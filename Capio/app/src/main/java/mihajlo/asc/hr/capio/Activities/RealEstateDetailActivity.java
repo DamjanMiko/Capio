@@ -53,6 +53,7 @@ public class RealEstateDetailActivity extends AppCompatActivity {
     private TextView textPrice;
     private TextView textAddress;
     private TextView textAddressCity;
+    private ImageView imageLike;
 
     private TextView textCijena;
     private TextView textKvadratura;
@@ -91,6 +92,7 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         btnContact = (RelativeLayout) findViewById(R.id.buttonContact);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         textCijena = (TextView) findViewById(R.id.textCijena);
+        imageLike = (ImageView) findViewById(R.id.imageLike);
 
         textPrice = (TextView) findViewById(R.id.textPrice);
         textAddress = (TextView) findViewById(R.id.textAddress);
@@ -109,7 +111,32 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         btnBack = (ImageView) findViewById(R.id.btnBack);
 
         Intent intent = getIntent();
-        RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
+        final RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
+        boolean notLike = (boolean) intent.getExtras().get("notLike");
+
+        if (!notLike) {
+            if (item.isLike()) {
+                imageLike.setImageResource(R.mipmap.ic_black_red_heart);
+            } else {
+                imageLike.setImageResource(R.mipmap.ic_black_heart);
+            }
+            imageLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (item.isLike()) {
+                        item.setLike(false);
+                        imageLike.setImageResource(R.mipmap.ic_black_heart);
+                    } else {
+                        item.setLike(true);
+                        imageLike.setImageResource(R.mipmap.ic_black_red_heart);
+                    }
+                }
+            });
+        } else {
+            imageLike.setVisibility(View.GONE);
+        }
+
+
 
         final ParcelableUnit unit = item.getUnit();
 
@@ -181,6 +208,8 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         textKvadratura.setText(Html.fromHtml("Kvadratura: " + unit.getArea() + " m" + "<sup>2</sup>"));
         textOpis.setText(unit.getDescription());
         textPicNumb.setText("1/" + unit.getImages().size());
+        textRezije.setText("Prosječne režije: " + unit.getAvgOverheads() + " kn/mj");
+        textBrojSoba.setText("Broj soba: " + unit.getRooms());
     }
 
     private void setMap(final Bundle savedInstanceState, ParcelableLocation location) {
@@ -242,7 +271,6 @@ public class RealEstateDetailActivity extends AppCompatActivity {
                 });
             }
         });
-
 
     }
 

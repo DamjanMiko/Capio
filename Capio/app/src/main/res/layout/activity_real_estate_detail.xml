@@ -27,43 +27,64 @@
                     android:layout_width="368dp"
                     android:layout_height="250dp" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="@dimen/margin_tiny"
-                    android:paddingBottom="@dimen/margin_small"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
                     android:background="@color/whiteText">
 
-                    <TextView
-                        android:id="@+id/textPrice"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1750 kn/mj"
-                        android:textColor="@color/blackText"
-                        android:paddingStart="20dp"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_large" />
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/margin_tiny"
+                        android:paddingBottom="@dimen/margin_small"
+                        android:background="@color/whiteText">
 
-                    <TextView
-                        android:id="@+id/textAddress"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/textPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1750 kn/mj"
+                            android:textColor="@color/blackText"
+                            android:paddingStart="20dp"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_large" />
+
+                        <TextView
+                            android:id="@+id/textAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Brozova ulica 44"
+                            android:textColor="@color/grayText1"
+                            android:paddingStart="20dp"
+                            android:textSize="@dimen/text_large" />
+
+                        <TextView
+                            android:id="@+id/textAddressCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="10000 Zagreb, Hrvatska"
+                            android:textColor="@color/grayText2"
+                            android:paddingStart="20dp"
+                            android:textSize="@dimen/text_medium" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageLike"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Brozova ulica 44"
-                        android:textColor="@color/grayText1"
-                        android:paddingStart="20dp"
-                        android:textSize="@dimen/text_large" />
+                        android:src="@mipmap/ic_black_red_heart"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:background="@color/whiteText"
+                        android:layout_centerVertical="true"
+                        />
 
-                    <TextView
-                        android:id="@+id/textAddressCity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="10000 Zagreb, Hrvatska"
-                        android:textColor="@color/grayText2"
-                        android:paddingStart="20dp"
-                        android:textSize="@dimen/text_medium" />
+                </RelativeLayout>
 
-                </LinearLayout>
+
 
 
                 <LinearLayout
@@ -71,7 +92,7 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
@@ -128,8 +149,6 @@
                         android:textColor="@color/blackText"
                         android:textSize="@dimen/text_small" />
 
-
-
                 </LinearLayout>
 
 
@@ -138,8 +157,8 @@
                     android:orientation="vertical"
                     android:layout_height="300dp"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
 
@@ -168,8 +187,8 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
 
@@ -201,8 +220,8 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
 
