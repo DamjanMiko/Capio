@@ -61,7 +61,7 @@
                             android:textSize="14sp"
                             android:textColor="#000"/>
 
-                        <TextView
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/fullName"
@@ -109,7 +109,7 @@
                                     android:layout_marginTop="5dp"
                                     android:background="@drawable/ic_location"/>
 
-                                <TextView
+                                <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Miljackina 44"
@@ -154,7 +154,7 @@
                                     android:background="@drawable/ic_shapes"/>
 
 
-                                <TextView
+                                <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Zagreb"
@@ -302,7 +302,7 @@
 
 
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+919429283901"
@@ -344,7 +344,7 @@
 
             </LinearLayout>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="test@gmail.com"
@@ -353,7 +353,6 @@
                 android:textSize="16sp"
                 android:inputType="textEmailAddress"
                 android:padding="5dp"
-                android:drawableEnd="@drawable/ic_circle_2"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="40dp"/>
             <View
