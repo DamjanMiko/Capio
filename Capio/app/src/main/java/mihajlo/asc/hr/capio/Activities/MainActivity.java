@@ -157,10 +157,17 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         startActivity(openFilterIntent);
     }
 
+    public void seeUnits(View view) {
+        Intent intent = new Intent(MainActivity.this, UnitListActivity.class);
+        intent.putExtra("userId", userId);
+        startActivity(intent);
+    }
+
     @Override
     public void onListFragmentInteraction(RealEstateItem item) {
         Intent intent = new Intent(MainActivity.this, RealEstateDetailActivity.class);
         intent.putExtra("item", item);
+        intent.putExtra("notLike", false);
         startActivity(intent);
     }
 

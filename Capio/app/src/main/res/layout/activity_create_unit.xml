@@ -18,7 +18,10 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
+            android:layout_marginTop="@dimen/text_medium"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
             android:paddingBottom="@dimen/margin_small"
             android:background="@drawable/unit_description">
 
@@ -28,7 +31,7 @@
                 android:paddingTop="@dimen/margin_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Unesite lokaciju apartmana:"
+                android:text="Unesite lokaciju jedinice:"
                 android:textColor="@color/blackText"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_medium" />
@@ -109,7 +112,7 @@
                 android:paddingTop="@dimen/margin_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Unesite slike apartmana:"
+                android:text="Unesite slike jedinice:"
                 android:textColor="@color/blackText"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_medium" />
@@ -146,7 +149,7 @@
                 android:paddingTop="@dimen/margin_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Unesite informacije o apartmanu:"
+                android:text="Unesite informacije o jedinici:"
                 android:textColor="@color/blackText"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_medium" />

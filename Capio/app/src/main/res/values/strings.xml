@@ -9,6 +9,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sample_show_log">Show Log</string>
     <string name="sample_hide_log">Hide Log</string>
+    <string name="see_units">Pregled jedinica</string>
 
     <string name="cancel_login">Login cancelled.</string>
     <string name="fail_login">Login failed.</string>
@@ -30,5 +31,6 @@
     <string name="rooms_filter">Number of rooms</string>
     <string name="logout_button">Logout</string>
     <string name="filter_overheads">Overheads</string>
+    <string name="title_activity_unit_list">UnitListActivity</string>
 
 </resources>

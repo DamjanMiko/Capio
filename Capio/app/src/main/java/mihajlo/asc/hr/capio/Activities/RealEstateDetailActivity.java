@@ -112,24 +112,31 @@ public class RealEstateDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
+        boolean notLike = (boolean) intent.getExtras().get("notLike");
 
-        if (item.isLike()) {
-            imageLike.setImageResource(R.mipmap.ic_black_red_heart);
-        } else {
-            imageLike.setImageResource(R.mipmap.ic_black_heart);
-        }
-        imageLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (item.isLike()) {
-                    item.setLike(false);
-                    imageLike.setImageResource(R.mipmap.ic_black_heart);
-                } else {
-                    item.setLike(true);
-                    imageLike.setImageResource(R.mipmap.ic_black_red_heart);
-                }
+        if (!notLike) {
+            if (item.isLike()) {
+                imageLike.setImageResource(R.mipmap.ic_black_red_heart);
+            } else {
+                imageLike.setImageResource(R.mipmap.ic_black_heart);
             }
-        });
+            imageLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (item.isLike()) {
+                        item.setLike(false);
+                        imageLike.setImageResource(R.mipmap.ic_black_heart);
+                    } else {
+                        item.setLike(true);
+                        imageLike.setImageResource(R.mipmap.ic_black_red_heart);
+                    }
+                }
+            });
+        } else {
+            imageLike.setVisibility(View.GONE);
+        }
+
+
 
         final ParcelableUnit unit = item.getUnit();
 

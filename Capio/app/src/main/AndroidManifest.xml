@@ -75,13 +75,10 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".Activities.CreateUnitActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <activity android:name=".Activities.CreateUnitActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
+        <activity android:name=".Activities.UnitListActivity"></activity>
     </application>
 
 </manifest>
