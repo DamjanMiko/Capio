@@ -2,6 +2,8 @@ package mihajlo.asc.hr.capio.Models;
 
 import java.sql.Blob;
 
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableImage;
+
 /**
  * Created by Damjan on 3/29/2017.
  */
@@ -18,6 +20,10 @@ public class Image {
         this.id = id;
         this.img = img;
         this.url = url;
+    }
+
+    public Image(ParcelableImage parcelableImage) {
+        new Image(parcelableImage.getId(), parcelableImage.getImg(), parcelableImage.getUrl());
     }
 
     public Long getId() {

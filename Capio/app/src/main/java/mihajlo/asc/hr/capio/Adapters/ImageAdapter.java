@@ -3,6 +3,8 @@ package mihajlo.asc.hr.capio.Adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +30,15 @@ public class ImageAdapter extends PagerAdapter {
         this.context=context;
     }
 
-    public ImageAdapter(Context context, List<ParcelableImage> images) {
+    public ImageAdapter(Context context, List<ParcelableImage> images, boolean created) {
         this.context=context;
         for (ParcelableImage img : images) {
-            addImageUrl(img.getUrl());
+            if (created) {
+                addImageUri(Uri.parse(img.getUrl()));
+            } else {
+                addImageUrl(img.getUrl());
+            }
+
         }
     }
 
@@ -44,6 +51,14 @@ public class ImageAdapter extends PagerAdapter {
                         notifyDataSetChanged();
                     }
                 }).execute();
+    }
+
+    public void addImageUri(Uri uri) {
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+            allImages.add(bitmap);
+        } catch (Exception e) {}
+
     }
 
     @Override

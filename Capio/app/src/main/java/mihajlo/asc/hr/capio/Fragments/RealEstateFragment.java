@@ -66,11 +66,6 @@ public class RealEstateFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             if (firstTime) {
-
-//                new AllLikeUnitsByUserIdTask(new AllLikeUnitsByUserIdTask.AsynResponse() {
-//
-//                }).execute();
-
                 new AllUnitsTask(new AllUnitsTask.AsynResponse() {
                     @Override
                     public void processFinish(List<Unit> output) {

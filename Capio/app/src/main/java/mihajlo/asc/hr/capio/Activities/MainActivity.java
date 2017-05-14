@@ -160,6 +160,13 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
     public void seeUnits(View view) {
         Intent intent = new Intent(MainActivity.this, UnitListActivity.class);
         intent.putExtra("userId", userId);
+        intent.putExtra("userId", userId);
+        intent.putExtra("name",name);
+        intent.putExtra("surname",surname);
+        intent.putExtra("imageUrl",imageUrl);
+        intent.putExtra("email", email);
+        intent.putExtra("birthday", birthday);
+        intent.putExtra("gender", gender);
         startActivity(intent);
     }
 

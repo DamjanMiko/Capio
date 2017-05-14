@@ -1,5 +1,7 @@
 package mihajlo.asc.hr.capio.Models;
 
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableLocation;
+
 /**
  * Created by Damjan on 3/29/2017.
  */
@@ -22,6 +24,12 @@ public class Location {
         this.postalCode = postalCode;
         this.country = country;
         this.city = city;
+    }
+
+    public Location(ParcelableLocation parcelableLocation) {
+        new Location(parcelableLocation.getId(), parcelableLocation.getStreetName(),
+                parcelableLocation.getHouseNumber(), parcelableLocation.getPostalCode(),
+                parcelableLocation.getCountry(), parcelableLocation.getCity());
     }
 
     public Long getId() {

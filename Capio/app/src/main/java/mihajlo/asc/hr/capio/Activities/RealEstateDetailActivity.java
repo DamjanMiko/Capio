@@ -73,6 +73,7 @@ public class RealEstateDetailActivity extends AppCompatActivity {
     private Fragment mapView;
     private Fragment streetView;
     private boolean mapVisible = true;
+    private boolean created = false;
 
     private static final String MARKER_POSITION_KEY = "MarkerPosition";
 
@@ -111,7 +112,14 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         btnBack = (ImageView) findViewById(R.id.btnBack);
 
         Intent intent = getIntent();
-        final RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
+
+        final RealEstateItem item;
+        if (intent.getParcelableExtra("item") == null) {
+            item = (RealEstateItem) intent.getParcelableExtra("createdItem");
+            created = true;
+        } else {
+            item = (RealEstateItem) intent.getParcelableExtra("item");
+        }
         boolean notLike = (boolean) intent.getExtras().get("notLike");
 
         if (!notLike) {
@@ -143,7 +151,7 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         setText(unit);
         setMap(savedInstanceState, unit.getLocation());
         viewPagerImages = (ViewPager) findViewById(R.id.mvieww);
-        ImageAdapter adapter = new ImageAdapter(this, unit.getImages());
+        ImageAdapter adapter = new ImageAdapter(this, unit.getImages(), created);
         viewPagerImages.setAdapter(adapter);
         viewPagerImages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
