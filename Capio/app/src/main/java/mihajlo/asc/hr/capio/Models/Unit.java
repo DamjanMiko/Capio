@@ -1,6 +1,10 @@
 package mihajlo.asc.hr.capio.Models;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableImage;
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableUnit;
 
 /**
  * Created by Damjan on 3/29/2017.
@@ -30,6 +34,16 @@ public class Unit {
         this.rooms = rooms;
         this.location = location;
         this.images = images;
+    }
+
+    public Unit(ParcelableUnit parcelableUnit) {
+        List<Image> images = new ArrayList<>();
+        for (ParcelableImage parcelableImage : parcelableUnit.getImages()) {
+            images.add(new Image(parcelableImage));
+        }
+        new Unit(parcelableUnit.getId(), parcelableUnit.getDescription(), parcelableUnit.getPrice(),
+                parcelableUnit.getArea(), parcelableUnit.isRent(), parcelableUnit.getAvgOverheads(),
+                parcelableUnit.getRooms(), new Location(parcelableUnit.getLocation()), images);
     }
 
     public Long getId() {

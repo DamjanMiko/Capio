@@ -75,10 +75,12 @@
                         android:id="@+id/imageLike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_black_heart"
+                        android:src="@mipmap/ic_black_red_heart"
                         android:layout_alignParentRight="true"
                         android:layout_margin="@dimen/margin_medium"
-                        android:background="@color/whiteText"/>
+                        android:background="@color/whiteText"
+                        android:layout_centerVertical="true"
+                        />
 
                 </RelativeLayout>
 
@@ -90,7 +92,7 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
@@ -147,8 +149,6 @@
                         android:textColor="@color/blackText"
                         android:textSize="@dimen/text_small" />
 
-
-
                 </LinearLayout>
 
 
@@ -157,8 +157,8 @@
                     android:orientation="vertical"
                     android:layout_height="300dp"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
 
@@ -187,8 +187,8 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
 
@@ -220,8 +220,8 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/unit_description">
 

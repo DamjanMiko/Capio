@@ -73,6 +73,7 @@ public class RealEstateDetailActivity extends AppCompatActivity {
     private Fragment mapView;
     private Fragment streetView;
     private boolean mapVisible = true;
+    private boolean created = false;
 
     private static final String MARKER_POSITION_KEY = "MarkerPosition";
 
@@ -111,32 +112,46 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         btnBack = (ImageView) findViewById(R.id.btnBack);
 
         Intent intent = getIntent();
-        final RealEstateItem item = (RealEstateItem) intent.getParcelableExtra("item");
 
-        if (item.isLike()) {
-            imageLike.setImageResource(R.mipmap.ic_black_red_heart);
+        final RealEstateItem item;
+        if (intent.getParcelableExtra("item") == null) {
+            item = (RealEstateItem) intent.getParcelableExtra("createdItem");
+            created = true;
         } else {
-            imageLike.setImageResource(R.mipmap.ic_black_heart);
+            item = (RealEstateItem) intent.getParcelableExtra("item");
         }
-        imageLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (item.isLike()) {
-                    item.setLike(false);
-                    imageLike.setImageResource(R.mipmap.ic_black_heart);
-                } else {
-                    item.setLike(true);
-                    imageLike.setImageResource(R.mipmap.ic_black_red_heart);
-                }
+        boolean notLike = (boolean) intent.getExtras().get("notLike");
+
+        if (!notLike) {
+            if (item.isLike()) {
+                imageLike.setImageResource(R.mipmap.ic_black_red_heart);
+            } else {
+                imageLike.setImageResource(R.mipmap.ic_black_heart);
             }
-        });
+            imageLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (item.isLike()) {
+                        item.setLike(false);
+                        imageLike.setImageResource(R.mipmap.ic_black_heart);
+                    } else {
+                        item.setLike(true);
+                        imageLike.setImageResource(R.mipmap.ic_black_red_heart);
+                    }
+                }
+            });
+        } else {
+            imageLike.setVisibility(View.GONE);
+        }
+
+
 
         final ParcelableUnit unit = item.getUnit();
 
         setText(unit);
         setMap(savedInstanceState, unit.getLocation());
         viewPagerImages = (ViewPager) findViewById(R.id.mvieww);
-        ImageAdapter adapter = new ImageAdapter(this, unit.getImages());
+        ImageAdapter adapter = new ImageAdapter(this, unit.getImages(), created);
         viewPagerImages.setAdapter(adapter);
         viewPagerImages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

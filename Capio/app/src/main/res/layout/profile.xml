@@ -56,12 +56,12 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text=" Full Name"
+                            android:text=" Ime i prezime"
                             android:layout_marginStart="5dp"
                             android:textSize="14sp"
                             android:textColor="#000"/>
 
-                        <TextView
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/fullName"
@@ -93,7 +93,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text=" Address"
+                                android:text=" Adresa"
                                 android:layout_marginStart="10dp"
                                 android:textSize="14sp"
                                 android:textColor="#000"/>
@@ -109,7 +109,7 @@
                                     android:layout_marginTop="5dp"
                                     android:background="@drawable/ic_location"/>
 
-                                <TextView
+                                <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Miljackina 44"
@@ -136,7 +136,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text=" City"
+                                android:text=" Grad"
                                 android:layout_marginStart="8dp"
                                 android:textSize="14sp"
                                 android:textColor="#000"/>
@@ -154,7 +154,7 @@
                                     android:background="@drawable/ic_shapes"/>
 
 
-                                <TextView
+                                <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Zagreb"
@@ -265,6 +265,13 @@
             android:onClick="openFilter"
             android:text="@string/set_filters_button"/>
 
+        <Button
+            android:id="@+id/seeUnits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="seeUnits"
+            android:text="@string/see_units"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
@@ -293,7 +300,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mobile"
+                    android:text="Mobitel"
                     android:textSize="14sp"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="20dp"/>
@@ -302,7 +309,7 @@
 
 
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+919429283901"
@@ -344,7 +351,7 @@
 
             </LinearLayout>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="test@gmail.com"
@@ -353,7 +360,6 @@
                 android:textSize="16sp"
                 android:inputType="textEmailAddress"
                 android:padding="5dp"
-                android:drawableEnd="@drawable/ic_circle_2"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="40dp"/>
             <View

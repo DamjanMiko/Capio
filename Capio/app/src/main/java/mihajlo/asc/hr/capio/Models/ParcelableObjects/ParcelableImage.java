@@ -1,5 +1,6 @@
 package mihajlo.asc.hr.capio.Models.ParcelableObjects;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 

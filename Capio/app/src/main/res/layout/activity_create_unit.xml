@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="mihajlo.asc.hr.capio.Activities.CreateUnitActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_medium"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            android:background="@drawable/unit_description">
+
+            <TextView
+                android:paddingLeft="@dimen/margin_medium"
+                android:paddingBottom="@dimen/margin_small"
+                android:paddingTop="@dimen/margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unesite lokaciju jedinice:"
+                android:textColor="@color/blackText"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_medium" />
+
+            <EditText
+                android:id="@+id/txtStreetName"
+                android:textColor="@color/blackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_tiny"
+                android:hint="Ulica"
+                android:maxLines="2"
+                android:typeface="serif"/>
+
+            <EditText
+                android:id="@+id/txtHouseNumber"
+                android:textColor="@color/blackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_tiny"
+                android:hint="Kučanski broj"
+                android:maxLength="5"
+                android:maxLines="1"
+                android:typeface="serif"/>
+
+            <EditText
+                android:id="@+id/txtPostalCode"
+                android:textColor="@color/blackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_tiny"
+                android:hint="Poštanski broj"
+                android:maxLength="5"
+                android:maxLines="1"
+                android:inputType="number"
+                android:typeface="serif"/>
+
+            <EditText
+                android:id="@+id/txtCity"
+                android:textColor="@color/blackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_tiny"
+                android:hint="Mjesto"
+                android:maxLines="1"
+                android:typeface="serif"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_tiny"
+            android:background="@drawable/unit_description">
+
+            <TextView
+                android:paddingLeft="@dimen/margin_medium"
+                android:paddingBottom="@dimen/margin_small"
+                android:paddingTop="@dimen/margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unesite slike jedinice:"
+                android:textColor="@color/blackText"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_medium" />
+
+
+            <mihajlo.asc.hr.capio.Adapters.Contents.ExpandableHeightGridView
+                android:id="@+id/gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:horizontalSpacing="3dp"
+                android:isScrollContainer="false"
+                android:numColumns="4"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            android:background="@drawable/unit_description">
+
+            <TextView
+                android:paddingLeft="@dimen/margin_medium"
+                android:paddingBottom="@dimen/margin_small"
+                android:paddingTop="@dimen/margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unesite informacije o jedinici:"
+                android:textColor="@color/blackText"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_medium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txtPrice"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:paddingStart="@dimen/margin_small"
+                    android:paddingEnd="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_tiny"
+                    android:hint="Cijena"
+                    android:maxLength="5"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:typeface="serif"/>
+
+                <TextView
+                    android:textColor="@color/blackText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:textSize="@dimen/text_medium"
+                    android:text="kn/mj"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:paddingTop="5sp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txtArea"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:paddingStart="@dimen/margin_small"
+                    android:paddingEnd="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_tiny"
+                    android:maxLines="1"
+                    android:maxLength="5"
+                    android:inputType="numberDecimal"
+                    android:hint="Kvadratura"
+                    android:typeface="serif"/>
+
+                <TextView
+                    android:id="@+id/txtAreaM2"
+                    android:textColor="@color/blackText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:textSize="@dimen/text_medium"
+                    android:paddingTop="5sp"
+                    android:text="m"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txtAvgOverheads"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:paddingStart="@dimen/margin_small"
+                    android:paddingEnd="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_tiny"
+                    android:hint="Prosječne režije"
+                    android:maxLines="1"
+                    android:maxLength="5"
+                    android:inputType="number"
+                    android:typeface="serif"/>
+
+                <TextView
+                    android:textColor="@color/blackText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:textSize="@dimen/text_medium"
+                    android:text="kn/mj"/>
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/txtRooms"
+                android:textColor="@color/blackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_tiny"
+                android:hint="Broj soba"
+                android:maxLines="1"
+                android:maxLength="5"
+                android:inputType="numberDecimal"
+                android:typeface="serif"/>
+
+            <EditText
+                android:id="@+id/txtDescription"
+                android:textColor="@color/blackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_tiny"
+                android:hint="Detaljni opis"
+                android:typeface="serif"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

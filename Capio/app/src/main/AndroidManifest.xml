@@ -67,12 +67,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.FilterActivity" />
         <activity android:name=".Activities.MapActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".Activities.CreateUnitActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity android:name=".Activities.UnitListActivity"></activity>
     </application>
 
 </manifest>
