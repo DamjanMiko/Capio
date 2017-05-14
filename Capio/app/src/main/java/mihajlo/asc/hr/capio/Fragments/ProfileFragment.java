@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "User saved",
+                Toast.makeText(getActivity(), "Korisnik spremljen",
                         Toast.LENGTH_SHORT).show();
                 InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 mgr.hideSoftInputFromWindow(save.getWindowToken(), 0);
