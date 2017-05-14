@@ -56,11 +56,27 @@ public class CreateUnitActivity extends AppCompatActivity {
     private List<Uri> uris= new ArrayList<Uri>();
 
     private ParcelableUnit cratedUnit;
+    private String name;
+    private String surname;
+    private String imageUrl;
+    private String birthday;
+    private String email;
+    private String gender;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_unit);
+
+        Bundle inBundle = getIntent().getExtras();
+        userId = inBundle.get("userId").toString();
+        name = inBundle.get("name").toString();
+        surname = inBundle.get("surname").toString();
+        imageUrl = inBundle.get("imageUrl").toString();
+        birthday = inBundle.get("birthday").toString();
+        email = inBundle.get("email").toString();
+        gender = inBundle.get("gender").toString();
 
         gridView = (ExpandableHeightGridView) findViewById(R.id.gridview);
         adapter = new SquareImageAdapter(this);
@@ -156,7 +172,7 @@ public class CreateUnitActivity extends AppCompatActivity {
         }
     }
 
-    private boolean createUnit() {
+    private void createUnit() {
         String streetName = txtStreetName.getText().toString();
         String houseNumber = txtHouseNumber.getText().toString();
         String postalCode = txtPostalCode.getText().toString();
@@ -187,11 +203,17 @@ public class CreateUnitActivity extends AppCompatActivity {
                         location, images);
                 Intent intent = new Intent(CreateUnitActivity.this, UnitListActivity.class);
                 intent.putExtra("createdUnit", cratedUnit);
+                intent.putExtra("userId", userId);
+                intent.putExtra("name",name);
+                intent.putExtra("surname",surname);
+                intent.putExtra("imageUrl",imageUrl);
+                intent.putExtra("email", email);
+                intent.putExtra("birthday", birthday);
+                intent.putExtra("gender", gender);
                 startActivity(intent);
             } catch (Exception e) {
                 Toast.makeText(this, "Krivi podaci!", Toast.LENGTH_LONG).show();
             }
         }
-        return true;
     }
 }

@@ -23,7 +23,9 @@ public class Image {
     }
 
     public Image(ParcelableImage parcelableImage) {
-        new Image(parcelableImage.getId(), parcelableImage.getImg(), parcelableImage.getUrl());
+        this.id = parcelableImage.getId();
+        this.img = parcelableImage.getImg();
+        this.url = parcelableImage.getUrl();
     }
 
     public Long getId() {

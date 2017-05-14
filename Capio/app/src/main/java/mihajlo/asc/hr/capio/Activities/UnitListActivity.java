@@ -47,6 +47,13 @@ public class UnitListActivity extends AppCompatActivity {
         public void onListFragmentInteraction(RealEstateContent.RealEstateItem item) {
             Intent intent = new Intent(UnitListActivity.this, RealEstateDetailActivity.class);
             intent.putExtra("createdItem", item);
+            intent.putExtra("userId", userId);
+            intent.putExtra("name",name);
+            intent.putExtra("surname",surname);
+            intent.putExtra("imageUrl",imageUrl);
+            intent.putExtra("email", email);
+            intent.putExtra("birthday", birthday);
+            intent.putExtra("gender", gender);
             intent.putExtra("notLike", true);
             startActivity(intent);
         }
@@ -98,7 +105,8 @@ public class UnitListActivity extends AppCompatActivity {
                         } else if (createdUnit != null) {
                             RealEstateContent.clearAll();
                             List<Unit> units = new ArrayList<Unit>();
-                            units.add(new Unit(createdUnit));
+                            Unit unit = new Unit(createdUnit);
+                            units.add(unit);
                             RealEstateContent.addItems(units, CONSTANT, CONSTANT, CONSTANT, CONSTANT, null);
                             recyclerView.setAdapter(new UnitListAdapter(UnitListActivity.this, RealEstateContent.ITEMS, mListener));
                             firstTime = false;
@@ -125,6 +133,13 @@ public class UnitListActivity extends AppCompatActivity {
     public void addUnit(View view) {
         Intent intent = new Intent(UnitListActivity.this, CreateUnitActivity.class);
         intent.putExtra("createdUnit", createdUnit);
+        intent.putExtra("userId", userId);
+        intent.putExtra("name",name);
+        intent.putExtra("surname",surname);
+        intent.putExtra("imageUrl",imageUrl);
+        intent.putExtra("email", email);
+        intent.putExtra("birthday", birthday);
+        intent.putExtra("gender", gender);
         startActivity(intent);
     }
 

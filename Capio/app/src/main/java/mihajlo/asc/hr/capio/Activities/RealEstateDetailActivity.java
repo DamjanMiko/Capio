@@ -75,6 +75,14 @@ public class RealEstateDetailActivity extends AppCompatActivity {
     private boolean mapVisible = true;
     private boolean created = false;
 
+    private String name;
+    private String surname;
+    private String imageUrl;
+    private String birthday;
+    private String email;
+    private String gender;
+    private String userId;
+
     private static final String MARKER_POSITION_KEY = "MarkerPosition";
 
     // George St, Sydney
@@ -89,6 +97,15 @@ public class RealEstateDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_real_estate_detail);
+
+        Bundle inBundle = getIntent().getExtras();
+        userId = inBundle.get("userId").toString();
+        name = inBundle.get("name").toString();
+        surname = inBundle.get("surname").toString();
+        imageUrl = inBundle.get("imageUrl").toString();
+        birthday = inBundle.get("birthday").toString();
+        email = inBundle.get("email").toString();
+        gender = inBundle.get("gender").toString();
 
         btnContact = (RelativeLayout) findViewById(R.id.buttonContact);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
@@ -195,16 +212,21 @@ public class RealEstateDetailActivity extends AppCompatActivity {
 
     private void setText(ParcelableUnit unit) {
 
-        new UserByUnitIdTask(unit.getId().toString(), new UserByUnitIdTask.AsynResponse() {
-            @Override
-            public void processFinish(UserObject output) {
-                ownerOfUnit = output;
-                textKorisnikIme.setText("Ime i prezime: " + output.getFirstName() + " " + output.getLastName());
-                textKorisnikTelefonskiBroj.setText("Telefonski broj: " + output.getContactInfo().getPhoneNumber());
-                textKorisnikEmail.setText("Email: " + output.getContactInfo().getEmail());
-            }
-        }).execute();
-
+        if (created) {
+            textKorisnikIme.setText("Ime i prezime: " + name + " " + surname);
+            textKorisnikTelefonskiBroj.setText("Telefonski broj: ");
+            textKorisnikEmail.setText("Email: " + email);
+        } else {
+            new UserByUnitIdTask(unit.getId().toString(), new UserByUnitIdTask.AsynResponse() {
+                @Override
+                public void processFinish(UserObject output) {
+                    ownerOfUnit = output;
+                    textKorisnikIme.setText("Ime i prezime: " + output.getFirstName() + " " + output.getLastName());
+                    textKorisnikTelefonskiBroj.setText("Telefonski broj: " + output.getContactInfo().getPhoneNumber());
+                    textKorisnikEmail.setText("Email: " + output.getContactInfo().getEmail());
+                }
+            }).execute();
+        }
 
         textPrice.setText((int) unit.getPrice() + " kn/mj");
         ParcelableLocation location = unit.getLocation();
