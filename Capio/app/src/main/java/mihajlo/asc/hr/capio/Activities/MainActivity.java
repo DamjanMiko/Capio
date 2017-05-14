@@ -65,6 +65,12 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
     private String email;
     private String gender;
 
+    private boolean firstTime = true;
+    private int priceFilter = 7500;
+    private int areaFilter = 300;
+    private int overheadsFilter = 3000;
+    private int roomsFilter = 10;
+
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
      * above, but is designed to give continuous feedback to the user when scrolling.
@@ -93,15 +99,34 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
 
         korisnik = new User(userId, name, surname, imageUrl, birthday, "|", "|", "Zagreb", email, gender);
 
-        // BEGIN_INCLUDE (setup_viewpager)
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        if(inBundle.get("price") != null) {
+            priceFilter = Integer.parseInt(inBundle.get("price").toString());
+        }
+
+        if(inBundle.get("firstTime") != null) {
+            String firstTimeString = inBundle.get("firstTime").toString();
+            if(firstTimeString.equals("true")) {
+                firstTime = true;
+            } else {
+                firstTime = false;
+            }
+        }
+
+        if(inBundle.get("area") != null) {
+            areaFilter = Integer.parseInt(inBundle.get("area").toString());
+        }
+
+        if(inBundle.get("overheads") != null) {
+            overheadsFilter = Integer.parseInt(inBundle.get("overheads").toString());
+        }
+
+        if(inBundle.get("rooms") != null) {
+            roomsFilter = Integer.parseInt(inBundle.get("rooms").toString());
+        }
+
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.setAdapter(new SamplePagerAdapter(getSupportFragmentManager()));
-        // END_INCLUDE (setup_viewpager)
 
-        // BEGIN_INCLUDE (setup_slidingtablayout)
-        // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
-        // it's PagerAdapter set.
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);
         mSlidingTabLayout.setDistributeEvenly(true);
@@ -160,19 +185,26 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
         public SamplePagerAdapter(FragmentManager fm) {
             super(fm);
             Bundle bundleUser = new Bundle();
-            //korisnik = new User("1","firstName","lastName","http://kingofwallpapers.com/picture/picture-008.jpg","birthday","0911234567","Kneza Mihajla 3","email","gender");
-
             bundleUser.putString("Korisnik",korisnik.toString());
-            ProfileFragment tmpProfileFragment = new ProfileFragment();
-            tmpProfileFragment.setArguments(bundleUser);
-            fragments.add(new RealEstateFragment()); // TODO umjesto ovoga treba dodati new RealEstateFragment()
+
+            ProfileFragment profileFragment = new ProfileFragment();
+            profileFragment.setArguments(bundleUser);
+
+            Bundle bundleFilter = new Bundle();
+            bundleFilter.putBoolean("firstTime", firstTime);
+            bundleFilter.putInt("price", priceFilter);
+            bundleFilter.putInt("area", areaFilter);
+            bundleFilter.putInt("overheads", overheadsFilter);
+            bundleFilter.putInt("rooms", roomsFilter);
+
+            RealEstateFragment realEstateFragment = new RealEstateFragment();
+            realEstateFragment.setArguments(bundleFilter);
+
+            fragments.add(realEstateFragment);
             fragments.add(new MapFragment());
-            fragments.add(tmpProfileFragment); //
+            fragments.add(profileFragment);
         }
 
-        /**
-         * @return the number of pages to display
-         */
         @Override
         public int getCount() {
             return 3;
@@ -195,7 +227,6 @@ public class MainActivity extends SampleActivityBase implements RealEstateFragme
             sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             return sb;
         }
-        // END_INCLUDE (pageradapter_getpagetitle)
 
         @Override
         public Fragment getItem(int position) {

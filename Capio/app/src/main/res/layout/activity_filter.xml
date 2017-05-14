@@ -32,9 +32,122 @@
         android:id="@+id/priceFilter"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:max="10000"
+        android:progress="3750"
+        android:max="7500"
         android:layout_below="@+id/prvi"/>
 
+    <LinearLayout
+        android:id="@+id/drugi"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_below="@+id/priceFilter">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/filter_area"
+            android:textSize="22sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/areaValue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/areaFilter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:progress="150"
+        android:max="300"
+        android:layout_below="@+id/drugi"/>
+
+    <LinearLayout
+        android:id="@+id/treci"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_below="@+id/areaFilter">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/filter_overheads"
+            android:textSize="22sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/overheadsValue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/overheadsFilter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:progress="1500"
+        android:max="3000"
+        android:layout_below="@+id/treci"/>
+
+    <TextView
+        android:id="@+id/roomsText"
+        android:text="@string/rooms_filter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:textSize="22sp"
+        android:layout_below="@id/overheadsFilter"/>
+
+    <LinearLayout
+        android:id="@+id/cetvrti"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_below="@+id/roomsText">
+
+        <Button
+            android:id="@+id/lessRoomsButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/minus_button"
+            android:textSize="22sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/roomsValue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textSize="22sp"/>
+
+        <Button
+            android:id="@+id/moreRoomsButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/plus_button"
+            android:textSize="22sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"

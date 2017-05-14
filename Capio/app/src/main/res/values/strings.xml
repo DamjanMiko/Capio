@@ -24,5 +24,11 @@
     <string name="filter_price">Price</string>
     <string name="set_filters_button">Set fiters</string>
     <string name="search_button">Search</string>
+    <string name="filter_area">Area</string>
+    <string name="minus_button">-</string>
+    <string name="plus_button">+</string>
+    <string name="rooms_filter">Number of rooms</string>
+    <string name="logout_button">Logout</string>
+    <string name="filter_overheads">Overheads</string>
 
 </resources>
