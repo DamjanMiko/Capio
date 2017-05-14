@@ -41,9 +41,15 @@ public class Unit {
         for (ParcelableImage parcelableImage : parcelableUnit.getImages()) {
             images.add(new Image(parcelableImage));
         }
-        new Unit(parcelableUnit.getId(), parcelableUnit.getDescription(), parcelableUnit.getPrice(),
-                parcelableUnit.getArea(), parcelableUnit.isRent(), parcelableUnit.getAvgOverheads(),
-                parcelableUnit.getRooms(), new Location(parcelableUnit.getLocation()), images);
+        this.id = parcelableUnit.getId();
+        this.description = parcelableUnit.getDescription();
+        this.price = parcelableUnit.getPrice();
+        this.area = parcelableUnit.getArea();
+        this.rent = parcelableUnit.isRent();
+        this.avgOverheads = parcelableUnit.getAvgOverheads();
+        this.rooms = parcelableUnit.getRooms();
+        this.location =  new Location(parcelableUnit.getLocation());
+        this.images = images;
     }
 
     public Long getId() {

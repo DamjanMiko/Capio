@@ -27,9 +27,12 @@ public class Location {
     }
 
     public Location(ParcelableLocation parcelableLocation) {
-        new Location(parcelableLocation.getId(), parcelableLocation.getStreetName(),
-                parcelableLocation.getHouseNumber(), parcelableLocation.getPostalCode(),
-                parcelableLocation.getCountry(), parcelableLocation.getCity());
+        this.id = parcelableLocation.getId();
+        this.streetName = parcelableLocation.getStreetName();
+        this.houseNumber = parcelableLocation.getHouseNumber();
+        this.postalCode = parcelableLocation.getPostalCode();
+        this.country = parcelableLocation.getCountry();
+        this.city = parcelableLocation.getCity();
     }
 
     public Long getId() {
