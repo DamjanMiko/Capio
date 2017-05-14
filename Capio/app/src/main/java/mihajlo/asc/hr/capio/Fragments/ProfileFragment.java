@@ -1,12 +1,16 @@
 package mihajlo.asc.hr.capio.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,13 +29,14 @@ import mihajlo.asc.hr.capio.Util.ImageLoadTask;
 public class ProfileFragment extends Fragment {
 
     private View view;
-    private TextView inputName;
-    private TextView inputEmail;
-    private TextView inputMobile;
-    private TextView inputAddress;
+    private EditText inputName;
+    private EditText inputEmail;
+    private EditText inputMobile;
+    private EditText inputAddress;
     private ImageView imgView;
-    private TextView inputCity;
+    private EditText inputCity;
     private User korisnik;
+    private TextView save;
 //    private ScrollView mainScrollView;
 
     public ProfileFragment() {
@@ -49,12 +54,13 @@ public class ProfileFragment extends Fragment {
 
         korisnik = User.fromString(KorisnikString);
         view =  inflater.inflate(R.layout.profile, container, false);
-        inputName = (TextView) view.findViewById(R.id.fullName);
-        inputEmail = (TextView) view.findViewById(R.id.email);
-        inputMobile  = (TextView) view.findViewById(R.id.mobile);
-        inputAddress  = (TextView) view.findViewById(R.id.address);
-        inputCity = (TextView) view.findViewById(R.id.city);
+        inputName = (EditText) view.findViewById(R.id.fullName);
+        inputEmail = (EditText) view.findViewById(R.id.email);
+        inputMobile  = (EditText) view.findViewById(R.id.mobile);
+        inputAddress  = (EditText) view.findViewById(R.id.address);
+        inputCity = (EditText) view.findViewById(R.id.city);
         imgView = (ImageView) view.findViewById(R.id.profile_img);
+        save = (TextView) view.findViewById(R.id.save);
 //        mainScrollView = (ScrollView) view.findViewById(R.id.scrollView);
         //setArguments(new Bundle());
 
