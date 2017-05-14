@@ -3,7 +3,6 @@ package mihajlo.asc.hr.capio.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -30,7 +29,6 @@ public class LoginActivity extends AppCompatActivity{
     private String firstName, lastName, email, birthday, gender;
     private URL profilePicture;
     private String userId;
-    private String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +46,6 @@ public class LoginActivity extends AppCompatActivity{
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        Log.e(TAG,object.toString());
-                        Log.e(TAG,response.toString());
-
                         try {
                             userId = object.getString("id");
                             profilePicture = new URL("https://graph.facebook.com/" + userId + "/picture?width=500&height=500");

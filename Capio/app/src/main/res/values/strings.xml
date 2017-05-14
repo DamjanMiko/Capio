@@ -2,7 +2,7 @@
 
     <string name="app_name">Capio</string>
     <string name="facebook_app_id">430369483977615</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Postavke</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
 
@@ -11,26 +11,26 @@
     <string name="sample_hide_log">Hide Log</string>
     <string name="see_units">Pregled jedinica</string>
 
-    <string name="cancel_login">Login cancelled.</string>
-    <string name="fail_login">Login failed.</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="email_missing_hint">Enter email address</string>
-    <string name="phone_missing_hint">Enter phone number</string>
-    <string name="email_text">Email</string>
-    <string name="phone_text">Phone</string>
-    <string name="location_missing_hint">Enter your location</string>
-    <string name="location_text">Location</string>
+    <string name="cancel_login">Prijava otkazana.</string>
+    <string name="fail_login">Neuspješna prijava.</string>
+    <string name="title_activity_maps">Karta</string>
+    <string name="email_missing_hint">Unesite e-mail</string>
+    <string name="phone_missing_hint">Unesite broj telefona</string>
+    <string name="email_text">E-mail</string>
+    <string name="phone_text">Telefon</string>
+    <string name="location_missing_hint">Unesite svoju lokaciju</string>
+    <string name="location_text">Lokacija</string>
     <string name="filter_menu_text">FILTER</string>
     <string name="filter">FILTER</string>
-    <string name="filter_price">Price</string>
-    <string name="set_filters_button">Set fiters</string>
-    <string name="search_button">Search</string>
-    <string name="filter_area">Area</string>
+    <string name="filter_price">Cijena</string>
+    <string name="set_filters_button">Postavke za pretragu</string>
+    <string name="search_button">Traži</string>
+    <string name="filter_area">Površina</string>
     <string name="minus_button">-</string>
     <string name="plus_button">+</string>
-    <string name="rooms_filter">Number of rooms</string>
-    <string name="logout_button">Logout</string>
-    <string name="filter_overheads">Overheads</string>
+    <string name="rooms_filter">Broj soba</string>
+    <string name="logout_button">Odjava</string>
+    <string name="filter_overheads">Režije</string>
     <string name="title_activity_unit_list">UnitListActivity</string>
 
 </resources>
