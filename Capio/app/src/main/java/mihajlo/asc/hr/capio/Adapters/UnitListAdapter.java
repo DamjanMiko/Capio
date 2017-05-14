@@ -4,8 +4,11 @@ package mihajlo.asc.hr.capio.Adapters;
  * Created by Damjan on 5/14/2017.
  */
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,10 +33,12 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
 
     private final List<RealEstateContent.RealEstateItem> mValues;
     private final RealEstateFragment.OnListFragmentInteractionListener mListener;
+    private Context context;
 
-    public UnitListAdapter(List<RealEstateContent.RealEstateItem> items, RealEstateFragment.OnListFragmentInteractionListener listener) {
+    public UnitListAdapter(Context context, List<RealEstateContent.RealEstateItem> items, RealEstateFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+        this.context = context;
     }
 
     @Override
@@ -47,22 +52,20 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
 
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(mValues.get(position).backgroundUrl));
+            BitmapDrawable ob = new BitmapDrawable(bitmap);
 
-        new ImageLoadWithListenerTask(mValues.get(position).backgroundUrl,
-                new ImageLoadWithListenerTask.AsynResponse() {
-                    @Override
-                    public void processFinish(Bitmap picture) {
-                        BitmapDrawable ob = new BitmapDrawable(picture);
+            final int sdk = android.os.Build.VERSION.SDK_INT;
+            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                holder.mLayout.setBackgroundDrawable(ob);
+            } else {
+                holder.mLayout.setBackground(ob);
+            }
+            holder.mImageLike.setVisibility(View.GONE);
+        } catch (Exception e) {
 
-                        final int sdk = android.os.Build.VERSION.SDK_INT;
-                        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            holder.mLayout.setBackgroundDrawable(ob);
-                        } else {
-                            holder.mLayout.setBackground(ob);
-                        }
-                        holder.mImageLike.setVisibility(View.GONE);
-                    }
-                }).execute();
+        }
 
 
         holder.mPriceView.setText(mValues.get(position).price + " kn/mj");

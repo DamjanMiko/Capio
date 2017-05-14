@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,6 +27,10 @@ import java.util.List;
 
 import mihajlo.asc.hr.capio.Adapters.Contents.ExpandableHeightGridView;
 import mihajlo.asc.hr.capio.Adapters.SquareImageAdapter;
+import mihajlo.asc.hr.capio.Models.Image;
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableImage;
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableLocation;
+import mihajlo.asc.hr.capio.Models.ParcelableObjects.ParcelableUnit;
 import mihajlo.asc.hr.capio.R;
 
 public class CreateUnitActivity extends AppCompatActivity {
@@ -48,6 +53,9 @@ public class CreateUnitActivity extends AppCompatActivity {
     private TextView txtAreaM2;
     private TextView txtAvgOverheads;
     private TextView txtRooms;
+    private List<Uri> uris= new ArrayList<Uri>();
+
+    private ParcelableUnit cratedUnit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +66,7 @@ public class CreateUnitActivity extends AppCompatActivity {
         adapter = new SquareImageAdapter(this);
         gridView.setAdapter(adapter);
 
-
+        cratedUnit = (ParcelableUnit) getIntent().getExtras().get("cratedUnit");
 
         txtStreetName = (TextView) findViewById(R.id.txtStreetName);
         txtHouseNumber = (TextView) findViewById(R.id.txtHouseNumber);
@@ -90,15 +98,7 @@ public class CreateUnitActivity extends AppCompatActivity {
 
                     Uri mImageUri=data.getData();
                     adapter.addItem(mImageUri);
-//                    // Get the cursor
-//                    Cursor cursor = getContentResolver().query(mImageUri,
-//                            filePathColumn, null, null, null);
-//                    // Move to first row
-//                    cursor.moveToFirst();
-//
-//                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                    imageEncoded  = cursor.getString(columnIndex);
-//                    cursor.close();
+                    uris.add(mImageUri);
 
                   //  Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageEncoded);
 
@@ -115,16 +115,7 @@ public class CreateUnitActivity extends AppCompatActivity {
 
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             adapter.addItem(uri);
-
-//                            // Get the cursor
-//                            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-//                            // Move to first row
-//                            cursor.moveToFirst();
-//
-//                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                            imageEncoded  = cursor.getString(columnIndex);
-//                            imagesEncodedList.add(imageEncoded);
-//                            cursor.close();
+                            uris.add(uri);
 
                         }
                         Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
@@ -158,15 +149,49 @@ public class CreateUnitActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.action_createUnit:
-                return createUnit();
+                createUnit();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     private boolean createUnit() {
+        String streetName = txtStreetName.getText().toString();
+        String houseNumber = txtHouseNumber.getText().toString();
+        String postalCode = txtPostalCode.getText().toString();
+        String city = txtCity.getText().toString();
 
+        String description = txtDescription.getText().toString();
+        String price = txtPrice.getText().toString();
+        String area = txtArea.getText().toString();
+        String avgOverheads = txtAvgOverheads.getText().toString();
+        String rooms = txtRooms.getText().toString();
 
+        if (TextUtils.isEmpty(streetName) || TextUtils.isEmpty(houseNumber) || TextUtils.isEmpty(postalCode) ||
+                TextUtils.isEmpty(city) || TextUtils.isEmpty(description) || TextUtils.isEmpty(price)
+                || TextUtils.isEmpty(area) || TextUtils.isEmpty(avgOverheads) || TextUtils.isEmpty(rooms)) {
+            Toast.makeText(this, "Nisu popunjena sva polja!", Toast.LENGTH_LONG).show();
+        } else if (uris.isEmpty()) {
+            Toast.makeText(this, "Trebate unijeti barem jednu sliku!", Toast.LENGTH_LONG).show();
+        } else {
+            List<ParcelableImage> images = new ArrayList<>();
+            for (Uri uri : uris) {
+                images.add(new ParcelableImage(10l, null, uri.toString()));
+            }
+            try {
+                ParcelableLocation location = new ParcelableLocation(10l, streetName, Integer.parseInt(houseNumber),
+                        Integer.parseInt(postalCode), "Hrvatska", city);
+                cratedUnit = new ParcelableUnit(10l, description, Float.parseFloat(price),
+                        Float.parseFloat(area), true, Integer.parseInt(avgOverheads), Integer.parseInt(rooms),
+                        location, images);
+                Intent intent = new Intent(CreateUnitActivity.this, UnitListActivity.class);
+                intent.putExtra("createdUnit", cratedUnit);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(this, "Krivi podaci!", Toast.LENGTH_LONG).show();
+            }
+        }
         return true;
     }
 }
